@@ -5,9 +5,21 @@
     "license": "GNU",
     "authors": [
         {
-            "name": "Philipp",
+            "name": "WeRePack Initiative",
+            "email": "hello@werepack.org"
+        },
+        {
+            "name": "Philipp Wellmer",
             "email": "philipp@ouun.io"
         }
     ],
-    "require": {}
+    "require": {},
+    "scripts": {
+        "lint": [
+            "phpcs --colors --ignore=index.php,vendor,resources,storage,dist --extensions=php --standard=PSR12 ."
+        ],
+        "fix": [
+            "phpcbf -q --ignore=index.php,vendor,resources,storage,dist --extensions=php --standard=PSR12 . && composer lint"
+        ]
+    }
 }

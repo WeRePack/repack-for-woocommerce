@@ -192,71 +192,63 @@ class Repack_Public {
 	}
 
 	/**
-	 * Save the post meta
-     *
+	 * Coupon Code handling
+	 *
+	 * @param bool|null $value  RePack checkbox value
+	 *
 	 * @since    1.0.0
 	 */
-	public function repack_apply_coupon() {
+	public function repack_apply_coupon( $value ) {
 		global $woocommerce;
+
+		if ( !$value ) {
+			$value = $_POST['shipping_repack'];
+		}
 
 		// Customizable coupon name via 'repack_coupon_name' filter
 		$coupon = sanitize_text_field( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
 
-		if ( ! empty( $_POST['shipping_repack'] ) && ! $woocommerce->cart->has_discount( $coupon ) ) {
+		// Fail early
+		if( ! wc_get_coupon_id_by_code( $coupon ) ) {
+		    return;
+		}
 
-			if ($woocommerce->cart->apply_coupon( $coupon ) ) {
-				$saving = $woocommerce->cart->get_coupon_discount_amount( $coupon, false );
+		if ( isset( $value ) && $value && ! $woocommerce->cart->has_discount( $coupon ) ) {
+
+		    // Add coupon and show notice on success
+			if ( $woocommerce->cart->apply_coupon( $coupon ) ) {
 				wc_clear_notices();
 				wc_add_notice( sprintf(
-					__("Your order is over %s so a %s Discount has been Applied! Your total order weight is %s.", "woocommerce"),
-					$saving, '10%', '<strong>' . 'YAY'. '</strong>'
+					__('Your discount for reusing packaging has been applied. %s', 'repack'),
+					'<strong>' . __('Thank you!', 'repack') . '</strong>'
 				), "success");
-
-				$woocommerce->cart->calculate_totals();
 			}
 
-			//$errors->add( 'repack_coupon', __( 'Yay, thanks a lot.', 'repack' ) . $saving );
-			// Manually recalculate totals.  If you do not do this, a refresh is required before user will see updated totals when discount is removed.
-			//
-		} else if ( empty( $_POST['shipping_repack'] ) && $woocommerce->cart->has_discount( $coupon ) ) {
+		} else if ( ! $value && $woocommerce->cart->has_discount( $coupon ) ) {
 
+			// Remove coupon and show notice on success
 			if( $woocommerce->cart->remove_coupon( $coupon ) ) {
 				wc_clear_notices();
 				wc_add_notice( sprintf(
-					__("Removed %s.", "woocommerce"),
-					'hello', '10%', '<strong>' . 'YAY'. '</strong>'
+					__("Your discount for reusing packaging has been removed.", "woocommerce")
 				), "notice");
-
-				$woocommerce->cart->calculate_totals();
 			}
 
-
-
-			//$errors->add( 'repack_coupon', __( 'NAY, thanks a lot.', 'repack' ) );
-
 		}
-
 	}
 
-
+	/**
+	 * AJAX Apply RePack Coupon
+	 */
 	public function repack_ajax_apply_coupon() {
-		global $woocommerce;
-
-		// Customizable coupon name via 'repack_coupon_name' filter
-		$coupon = sanitize_text_field( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
 
 		$values = array();
 		parse_str($_POST['post_data'], $values);
 
-		if( isset($values['shipping_repack']) && $values['shipping_repack'] && ! $woocommerce->cart->has_discount( $coupon ) ) {
-			$woocommerce->cart->apply_coupon( $coupon );
-		} else if ( !isset( $values['shipping_repack'] ) && $woocommerce->cart->has_discount( $coupon ) ) {
-			$woocommerce->cart->remove_coupon( $coupon );
-		}
+		// Run coupon logic with checkbox value
+		$this->repack_apply_coupon( $values['shipping_repack'] );
 
-		$woocommerce->cart->calculate_totals();
-		woocommerce_cart_totals();
-
+		// End AJAX request
 		wp_die();
 	}
 

@@ -193,14 +193,13 @@ class Repack {
 		$this->loader->add_filter( 'woocommerce_shipping_fields', $plugin_public, 'add_shipping_repack_field', 20, 1 );
 
 		// Apply Coupon
-		// $this->loader->add_action( 'woocommerce_checkout_update_order_review', $plugin_public, 'repack_apply_coupon', 20, 1 );
 		$this->loader->add_action( 'woocommerce_checkout_process', $plugin_public, 'repack_apply_coupon', 20, 1 );
 
 		// AJAX Apply Coupon
 		$this->loader->add_action( 'wp_ajax_nopriv_update_order_review', $plugin_public, 'repack_ajax_apply_coupon' );
 		$this->loader->add_action( 'wp_ajax_update_order_review', $plugin_public, 'repack_ajax_apply_coupon' );
 
-		// Save order
+		// Save order and user meta
 		$this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'repack_save_order', 20, 2 );
 
 	}
