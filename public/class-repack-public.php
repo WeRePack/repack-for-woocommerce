@@ -72,21 +72,7 @@ class Repack_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Repack_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Repack_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/repack-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -95,23 +81,10 @@ class Repack_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Repack_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Repack_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/repack-public.js', array( 'jquery', 'wc-checkout' ), $this->version, false );
 		wp_localize_script( $this->plugin_name, 'repack', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' )
-		));
+		) );
 	}
 
 	/**
@@ -206,10 +179,10 @@ class Repack_Public {
 		}
 
 		// Customizable coupon name via 'repack_coupon_name' filter
-		$coupon = sanitize_text_field( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
+		$coupon = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
 
 		// Fail early
-		if( ! wc_get_coupon_id_by_code( $coupon ) ) {
+		if( ! $this->repack_coupon_exists() ) {
 		    return;
 		}
 
@@ -242,14 +215,30 @@ class Repack_Public {
 	 */
 	public function repack_ajax_apply_coupon() {
 
-		$values = array();
-		parse_str($_POST['post_data'], $values);
+		// Fail early
+		if( $this->repack_coupon_exists() ) {
+            // Parse fields
+            $values = array();
+            parse_str($_POST['post_data'], $values);
 
-		// Run coupon logic with checkbox value
-		$this->repack_apply_coupon( $values['shipping_repack'] );
+            // Run coupon logic with checkbox value
+            $this->repack_apply_coupon( $values['shipping_repack'] );
+		}
 
-		// End AJAX request
+		// Die
 		wp_die();
+	}
+
+	/**
+     * Check for available coupon code?
+     *
+	 * @return bool
+	 */
+	public function repack_coupon_exists() {
+		// Customizable coupon name via 'repack_coupon_name' filter
+		$coupon = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
+
+	    return wc_get_coupon_id_by_code( $coupon ) > 0;
 	}
 
 
