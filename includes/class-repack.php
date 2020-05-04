@@ -29,6 +29,7 @@
  */
 class Repack {
 
+
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
@@ -83,7 +84,7 @@ class Repack {
 		}
 
 		$this->plugin_name = 'repack';
-		$this->meta_name = 'shipping_repack';
+		$this->meta_name   = 'shipping_repack';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -133,7 +134,6 @@ class Repack {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-repack-public.php';
 
 		$this->loader = new Repack_Loader();
-
 	}
 
 	/**
@@ -150,7 +150,6 @@ class Repack {
 		$plugin_i18n = new Repack_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -171,7 +170,6 @@ class Repack {
 		$this->loader->add_filter( 'woocommerce_admin_shipping_fields', $plugin_admin, 'add_shipping_field' );
 
 		$this->loader->add_filter( 'woocommerce_email_order_meta_fields', $plugin_admin, 'add_field_to_emails', 10, 3 );
-
 	}
 
 	/**
@@ -189,7 +187,7 @@ class Repack {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		// Add RePack field to checkout and user shipping settings
-		$this->loader->add_action( 'woocommerce_after_order_notes', $plugin_public, 'add_checkout_repack_field', 20, 1  );
+		$this->loader->add_action( 'woocommerce_after_order_notes', $plugin_public, 'add_checkout_repack_field', 20, 1 );
 		$this->loader->add_filter( 'woocommerce_shipping_fields', $plugin_public, 'add_shipping_repack_field', 20, 1 );
 
 		// Apply Coupon
@@ -201,7 +199,6 @@ class Repack {
 
 		// Save order and user meta
 		$this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'repack_save_order', 20, 2 );
-
 	}
 
 	/**
@@ -210,7 +207,7 @@ class Repack {
 	 * @since    1.0.0
 	 */
 	public function run() {
-		if ($this->is_wc_active()) {
+		if ( $this->is_wc_active() ) {
 			$this->loader->run();
 		}
 	}
@@ -254,5 +251,4 @@ class Repack {
 	public function is_wc_active() {
 		return in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) );
 	}
-
 }

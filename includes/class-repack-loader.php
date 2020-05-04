@@ -23,6 +23,7 @@
  */
 class Repack_Loader {
 
+
 	/**
 	 * The array of actions registered with WordPress.
 	 *
@@ -50,7 +51,6 @@ class Repack_Loader {
 
 		$this->actions = array();
 		$this->filters = array();
-
 	}
 
 	/**
@@ -102,11 +102,10 @@ class Repack_Loader {
 			'component'     => $component,
 			'callback'      => $callback,
 			'priority'      => $priority,
-			'accepted_args' => $accepted_args
+			'accepted_args' => $accepted_args,
 		);
 
 		return $hooks;
-
 	}
 
 	/**
@@ -123,7 +122,5 @@ class Repack_Loader {
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
-
 	}
-
 }

@@ -78,10 +78,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-repack.php';
  * @since    1.0.0
  */
 function run_repack() {
-
 	$plugin = new Repack();
 	$plugin->run();
-
 }
 
 run_repack();

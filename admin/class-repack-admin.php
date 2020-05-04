@@ -22,6 +22,7 @@
  */
 class Repack_Admin {
 
+
 	/**
 	 * The ID of this plugin.
 	 *
@@ -61,9 +62,8 @@ class Repack_Admin {
 	public function __construct( $plugin_name, $version, $meta_name ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-		$this->meta_name = $meta_name;
-
+		$this->version     = $version;
+		$this->meta_name   = $meta_name;
 	}
 
 	/**
@@ -86,7 +86,6 @@ class Repack_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/repack-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -109,7 +108,6 @@ class Repack_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/repack-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 	/**
@@ -125,41 +123,41 @@ class Repack_Admin {
 
 
 	public function get_order_repack_decision( $order ) {
-	    if( $this->is_repack_order( $order ) ) {
-	        return __( 'Shipping with reused packaging preferred!', 'stage' );
-        } else {
-		    return $this->is_repack_order( $order );
-        }
+		if ( $this->is_repack_order( $order ) ) {
+			return __( 'Shipping with reused packaging preferred!', 'stage' );
+		} else {
+			return $this->is_repack_order( $order );
+		}
 	}
 
 
 	public function add_order_details( $order ) {
 
-		if( $this->is_repack_order( $order ) ) { ?>
-            <div class="clear"></div>
-            <h3><?php _e( 'Reused Packaging', 'repack' ); ?></h3>
-            <div class="repack">
-                <p class="form-field form-field-wide">
-                    <strong>
-                        <?php echo $this->get_order_repack_decision( $order ); ?>
-                    </strong>
-                </p>
-            </div>
+		if ( $this->is_repack_order( $order ) ) { ?>
+			<div class="clear"></div>
+			<h3><?php _e( 'Reused Packaging', 'repack' ); ?></h3>
+			<div class="repack">
+				<p class="form-field form-field-wide">
+					<strong>
+						<?php echo $this->get_order_repack_decision( $order ); ?>
+					</strong>
+				</p>
+			</div>
 
-		<?php }
+			<?php
+		}
 	}
 
 	public function add_shipping_field( $fields ) {
 
-		$fields['repack'] = [
+		$fields['repack'] = array(
 			'label' => __( 'Reused Packaging', 'repack' ),
-			'type' => 'checkbox',
-			'show' => false,
-            'value' => 'test',
-		];
+			'type'  => 'checkbox',
+			'show'  => false,
+			'value' => 'test',
+		);
 
 		return $fields;
-
 	}
 
 	/**
@@ -167,14 +165,13 @@ class Repack_Admin {
 	 */
 	public function add_field_to_emails( $fields, $sent_to_admin, $order ) {
 
-	    if($this->is_repack_order( $order )) {
-		    $fields[ $this->meta_name ] = array(
-			    'label' => __( 'Reused Packaging', 'repack' ),
-			    'value' => __( 'Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available.', 'repack' ),
-		    );
-	    }
+		if ( $this->is_repack_order( $order ) ) {
+			$fields[ $this->meta_name ] = array(
+				'label' => __( 'Reused Packaging', 'repack' ),
+				'value' => __( 'Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available.', 'repack' ),
+			);
+		}
 
 		return $fields;
 	}
-
 }

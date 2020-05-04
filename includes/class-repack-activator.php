@@ -22,6 +22,7 @@
  */
 class Repack_Activator {
 
+
 	/**
 	 * Short Description. (use period)
 	 *
@@ -31,7 +32,6 @@ class Repack_Activator {
 	 */
 	public static function activate() {
 		// Add RePack counter option
-		add_option('repack_counter');
+		add_option( 'repack_counter' );
 	}
-
 }

@@ -22,6 +22,7 @@
  */
 class Repack_Deactivator {
 
+
 	/**
 	 * Short Description. (use period)
 	 *
@@ -31,7 +32,6 @@ class Repack_Deactivator {
 	 */
 	public static function deactivate() {
 		// Delete option
-		delete_option('repack_counter');
+		delete_option( 'repack_counter' );
 	}
-
 }
