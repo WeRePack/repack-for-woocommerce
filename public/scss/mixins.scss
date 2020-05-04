@@ -1,0 +1,37 @@
+@import "variables";
+@import "functions";
+
+@mixin sparkles($k) {
+  $shadow-list: ();
+  $n-groups: 7;
+  $group-base-angle: 360deg/$n-groups;
+  $group-distr-r: (1 + $k*.25)*$bubble-r;
+  $n-sparkles: 2;
+  $sparkle-base-angle: 360deg/$n-sparkles;
+  $sparkle-off-angle: 60deg; // offset angle from radius
+  $spread-r: -$k*$sparkle-r;
+
+  @for $i from 0 to $n-groups {
+    $group-curr-angle: $i*$group-base-angle - 90deg;
+    $xg: $group-distr-r*cos($group-curr-angle);
+    $yg: $group-distr-r*sin($group-curr-angle);
+
+    @for $j from 0 to $n-sparkles {
+      $sparkle-curr-angle: $group-curr-angle +
+                $sparkle-off-angle + $j*$sparkle-base-angle;
+      $xs: $xg + $sparkle-d*cos($sparkle-curr-angle);
+      $ys: $yg + $sparkle-d*sin($sparkle-curr-angle);
+
+      $shadow-list: $shadow-list, $xs $ys 0 $spread-r
+      hsl(($i + $j)*$group-base-angle, 100%, 75%);
+    }
+  }
+
+  box-shadow: $shadow-list;
+}
+
+@mixin bubble($ext) {
+  transform: scale(1);
+  border-color: $bubble-c;
+  border-width: $ext;
+}

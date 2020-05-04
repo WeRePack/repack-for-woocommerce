@@ -1,0 +1,100 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ *
+ * @see: https://css-tricks.com/recreating-the-twitter-heart-animation/
+ */
+
+@import "mixins";
+
+#shipping_repack-description {
+  // display: block !important;
+}
+
+#shipping_repack_field {
+  position: relative;
+
+  input[name="shipping_repack"] {
+    & ~ span.celebrate-repack {
+      align-self: center;
+      position: absolute;
+      height: 100%;
+      left: $bubble-d / 4;
+      top: 0;
+      color: #888;
+      font-size: 2em;
+      filter: grayscale(1);
+      user-select: none;
+      cursor: pointer;
+
+      &:before, &:after {
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        content: '';
+      }
+
+      &:before {
+        box-sizing: border-box;
+        margin: -$bubble-r;
+        border: solid $bubble-r $bubble-c;
+        width: $bubble-d;
+        height: $bubble-d;
+        transform: scale(0);
+      }
+
+      &:after {
+        margin: -$sparkle-r;
+        width: $sparkle-d;
+        height: $sparkle-d;
+        @include sparkles(1);
+      }
+    }
+
+    &:checked ~ span.celebrate-repack {
+      filter: none;
+      will-change: font-size;
+      animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+
+      &:before, &:after {
+        animation: inherit;
+        animation-timing-function: ease-out;
+      }
+
+      &:before {
+        will-change: transform, border-width, border-color;
+        animation-name: bubble;
+      }
+
+      &:after {
+        will-change: opacity, box-shadow;
+        animation-name: sparkles;
+      }
+    }
+
+    &:focus ~ span.celebrate-repack {
+      text-shadow: 0 0 3px white,
+      0 1px 1px white, 0 -1px 1px white,
+      1px 0 1px white, -1px 0 1px white;
+    }
+  }
+}
+
+@keyframes heart {
+  0%, 17.5% { font-size: 0; }
+}
+
+@keyframes bubble {
+  15% { @include bubble($bubble-r); }
+  30%, 100% { @include bubble(0); }
+}
+
+@keyframes sparkles {
+  0%, 10% { opacity: 0; }
+  15% {
+    opacity: 1;
+    @include sparkles(0);
+  }
+}

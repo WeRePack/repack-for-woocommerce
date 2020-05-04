@@ -1,0 +1,80 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ *
+ * @see: https://css-tricks.com/recreating-the-twitter-heart-animation/
+ */
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ *
+ * @see: https://css-tricks.com/recreating-the-twitter-heart-animation/
+ */
+#shipping_repack_field {
+  position: relative; }
+  #shipping_repack_field input[name="shipping_repack"] ~ span.celebrate-repack {
+    align-self: center;
+    position: absolute;
+    height: 100%;
+    left: 1.125rem;
+    top: 0;
+    color: #888;
+    font-size: 2em;
+    filter: grayscale(1);
+    user-select: none;
+    cursor: pointer; }
+    #shipping_repack_field input[name="shipping_repack"] ~ span.celebrate-repack:before, #shipping_repack_field input[name="shipping_repack"] ~ span.celebrate-repack:after {
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      content: ''; }
+    #shipping_repack_field input[name="shipping_repack"] ~ span.celebrate-repack:before {
+      box-sizing: border-box;
+      margin: -2.25rem;
+      border: solid 2.25rem transparent;
+      width: 4.5rem;
+      height: 4.5rem;
+      transform: scale(0); }
+    #shipping_repack_field input[name="shipping_repack"] ~ span.celebrate-repack:after {
+      margin: -0.1875rem;
+      width: 0.375rem;
+      height: 0.375rem;
+      box-shadow: 0.3247595264rem -3rem 0 -0.1875rem #ff8080, -0.3247595264rem -2.625rem 0 -0.1875rem #ffed80, 2.5479787002rem -1.6165621836rem 0 -0.1875rem #ffed80, 1.849823389rem -1.8905679518rem 0 -0.1875rem #a4ff80, 2.8525179434rem 0.9841799289rem 0 -0.1875rem #a4ff80, 2.6314516119rem 0.2675003341rem 0 -0.1875rem #80ffc8, 1.0090529945rem 2.8438144813rem 0 -0.1875rem #80ffc8, 1.4315458888rem 2.2241360615rem 0 -0.1875rem #80c8ff, -1.5942494402rem 2.5619987261rem 0 -0.1875rem #80c8ff, -0.8462596573rem 2.5059747482rem 0 -0.1875rem #a480ff, -2.9970495249rem 0.3509456756rem 0 -0.1875rem #a480ff, -2.4852584623rem 0.9012514787rem 0 -0.1875rem #ff80ed, -2.1430097676rem -2.1243765377rem 0 -0.1875rem #ff80ed, -2.2325539005rem -1.3749478496rem 0 -0.1875rem #ff8080; }
+  #shipping_repack_field input[name="shipping_repack"]:checked ~ span.celebrate-repack {
+    filter: none;
+    will-change: font-size;
+    animation: heart 1s cubic-bezier(0.17, 0.89, 0.32, 1.49); }
+    #shipping_repack_field input[name="shipping_repack"]:checked ~ span.celebrate-repack:before, #shipping_repack_field input[name="shipping_repack"]:checked ~ span.celebrate-repack:after {
+      animation: inherit;
+      animation-timing-function: ease-out; }
+    #shipping_repack_field input[name="shipping_repack"]:checked ~ span.celebrate-repack:before {
+      will-change: transform, border-width, border-color;
+      animation-name: bubble; }
+    #shipping_repack_field input[name="shipping_repack"]:checked ~ span.celebrate-repack:after {
+      will-change: opacity, box-shadow;
+      animation-name: sparkles; }
+  #shipping_repack_field input[name="shipping_repack"]:focus ~ span.celebrate-repack {
+    text-shadow: 0 0 3px white, 0 1px 1px white, 0 -1px 1px white, 1px 0 1px white, -1px 0 1px white; }
+
+@keyframes heart {
+  0%, 17.5% {
+    font-size: 0; } }
+
+@keyframes bubble {
+  15% {
+    transform: scale(1);
+    border-color: transparent;
+    border-width: 2.25rem; }
+  30%, 100% {
+    transform: scale(1);
+    border-color: transparent;
+    border-width: 0; } }
+
+@keyframes sparkles {
+  0%, 10% {
+    opacity: 0; }
+  15% {
+    opacity: 1;
+    box-shadow: 0.3247595264rem -2.4375rem 0 0rem #ff8080, -0.3247595264rem -2.0625rem 0 0rem #ffed80, 2.1081984913rem -1.26584917rem 0 0rem #ffed80, 1.4100431801rem -1.5398549383rem 0 0rem #a4ff80, 2.3041209928rem 0.8590119036rem 0 0rem #a4ff80, 2.0830546613rem 0.1423323087rem 0 0rem #80ffc8, 0.7649933912rem 2.3370194931rem 0 0rem #80ffc8, 1.1874862855rem 1.7173410733rem 0 0rem #80c8ff, -1.3501898369rem 2.0552037379rem 0 0rem #80c8ff, -0.6022000541rem 1.99917976rem 0 0rem #a480ff, -2.4486525744rem 0.2257776503rem 0 0rem #a480ff, -1.9368615117rem 0.7760834533rem 0 0rem #ff80ed, -1.7032295617rem -1.7736635246rem 0 0rem #ff80ed, -1.7927736947rem -1.0242348366rem 0 0rem #ff8080; } }
