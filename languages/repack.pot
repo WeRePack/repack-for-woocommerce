@@ -1,0 +1,73 @@
+# Copyright (C) 2020 Philipp Wellmer/ouun.io
+# This file is distributed under the same license as the RePack - Reuse Packaging for WooCommerce plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/repack\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-05-05T19:24:46+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: repack\n"
+
+#. Plugin Name of the plugin
+msgid "RePack - Reuse Packaging for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://ouun.io/plugins/repack"
+msgstr ""
+
+#. Description of the plugin
+msgid "This is a short description of what the plugin does. It's displayed in the WordPress admin area."
+msgstr ""
+
+#. Author of the plugin
+msgid "Philipp Wellmer/ouun.io"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://ouun.io"
+msgstr ""
+
+#: admin/class-repack-admin.php:123
+msgid "Reuse Packaging"
+msgstr ""
+
+#: admin/class-repack-admin.php:146
+#: admin/class-repack-admin.php:168
+msgid "Reused Packaging"
+msgstr ""
+
+#: admin/class-repack-admin.php:169
+msgid "Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available."
+msgstr ""
+
+#: public/class-repack-public.php:106
+msgid "Yes, please reuse packaging if available."
+msgstr ""
+
+#. translators: %s: WeRePack website link
+#: public/class-repack-public.php:109
+msgid "Help us to protect the environment. With your consent we will prefere already used shipping packaging for your order. Learn more about the initiative on %s."
+msgstr ""
+
+#. translators: %s: Amount of packaging to send
+#: public/class-repack-public.php:148
+msgid "Saving %s more packaging"
+msgid_plural "Saving %s more packaging"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Thank You
+#: public/class-repack-public.php:223
+msgid "Your discount for reusing packaging has been applied. %s"
+msgstr ""
+
+#: public/class-repack-public.php:224
+msgid "Thank you!"
+msgstr ""
