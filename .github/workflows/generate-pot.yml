@@ -1,0 +1,20 @@
+name: Create Localization Files
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  WP_POT_Generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: WordPress POT Generator
+        uses: varunsridharan/action-wp-pot-generator@1.1
+        with:
+          save_path: './languages'
+          item_slug: 'repack'
+          domain: 'repack'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
