@@ -81,7 +81,7 @@ class Repack_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/repack-public.js', array( 'jquery', 'wc-checkout' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/repack-public-min.js', array( 'jquery', 'wc-checkout' ), $this->version, false );
 		wp_localize_script(
 			$this->plugin_name,
 			'repack',
@@ -103,7 +103,11 @@ class Repack_Public {
 		$merged_args = array_merge(
 			array(
 				'label'       => __( 'Yes, please reuse packaging if available.', 'repack' ),
-				'description' => sprintf( __( 'Help us to protect the environment. With your consent we will prefere already used shipping packaging for your order. Learn more about the initiative on %s.', 'repack' ), '<a href="https://werepack.org/" target="_blank">WeRePack.org</a>' ),
+				'description' => sprintf(
+				/* translators: %s: WeRePack website link */
+					__( 'Help us to protect the environment. With your consent we will prefere already used shipping packaging for your order. Learn more about the initiative on %s.', 'repack' ),
+					'<a href="https://werepack.org/" target="_blank">WeRePack.org</a>'
+				),
 				'type'        => 'checkbox',
 				'required'    => false,
 				'priority'    => 99,
@@ -138,27 +142,32 @@ class Repack_Public {
 					<strong>
 						<?php
 						printf(
-							_n(
-								'Another reused packaging',
-								'Another %s reused packaging',
-								count( $cart->get_shipping_packages() ),
-								'repack'
+							esc_html(
+							/* translators: %s: Amount of packaging to send */
+								_n(
+									'Saving %s more packaging',
+									'Saving %s more packaging',
+									count( $cart->get_shipping_packages() ),
+									'repack'
+								)
 							),
-							number_format_i18n( count( $cart->get_shipping_packages() ) )
+							esc_html( number_format_i18n( count( $cart->get_shipping_packages() ) ) )
 						);
 						?>
 					</strong>
 				</p>
 				<div class="woocommerce-additional-fields__field-wrapper">
-					<?php echo woocommerce_form_field( 'shipping_repack', $this->get_repack_form_field_args( array( 'clear' => true ) ), $checkout->get_value( 'shipping_repack' ) ); ?>
+					<?php echo esc_html( woocommerce_form_field( 'shipping_repack', $this->get_repack_form_field_args( array( 'clear' => true ) ), $checkout->get_value( 'shipping_repack' ) ) ); ?>
 					<?php
-					echo woocommerce_form_field(
-						'repack_counter',
-						array(
-							'type'              => 'number',
-							'custom_attributes' => array( 'style' => 'display: none;' ),
-						),
-						count( $cart->get_shipping_packages() )
+					echo esc_html(
+						woocommerce_form_field(
+							'repack_counter',
+							array(
+								'type'              => 'number',
+								'custom_attributes' => array( 'style' => 'display: none;' ),
+							),
+							count( $cart->get_shipping_packages() )
+						)
 					);
 					?>
 				</div>
@@ -176,7 +185,7 @@ class Repack_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	function add_shipping_repack_field( $fields ) {
+	public function add_shipping_repack_field( $fields ) {
 		// Add extra section in checkout!
 		if ( ! is_checkout() ) {
 			$fields['shipping_repack'] = $this->get_repack_form_field_args();
@@ -213,6 +222,7 @@ class Repack_Public {
 				wc_clear_notices();
 				wc_add_notice(
 					sprintf(
+					/* translators: %s: Thank You */
 						__( 'Your discount for reusing packaging has been applied. %s', 'repack' ),
 						'<strong>' . __( 'Thank you!', 'repack' ) . '</strong>'
 					),
@@ -285,12 +295,20 @@ class Repack_Public {
 	 *
 	 * @param WC_Order $order
 	 * @param $data
+	 *
+	 * @throws Exception
 	 */
 	public function repack_save_order( $order, $data ) {
+		$nonce_value = wc_get_var( $_REQUEST['woocommerce-process-checkout-nonce'], wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
+
+		if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
+			WC()->session->set( 'refresh_totals', true );
+			throw new Exception( __( 'We were unable to process your order, please try again.', 'stage' ) );
+		}
 
 		if ( isset( $_POST['shipping_repack'] ) && isset( $_POST['repack_counter'] ) && ! empty( $_POST['shipping_repack'] ) && ! empty( $_POST['repack_counter'] ) ) {
 			// Save order meta & count saved packages
-			$order->update_meta_data( '_' . $this->meta_name, $_POST['shipping_repack'] );
+			$order->update_meta_data( '_' . $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
 
 			// Update global RePack counter
 			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );

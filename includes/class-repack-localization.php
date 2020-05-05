@@ -24,7 +24,7 @@
  * @subpackage Repack/includes
  * @author     Philipp Wellmer <philipp@ouun.io>
  */
-class Repack_i18n {
+class Repack_Localization {
 
 
 

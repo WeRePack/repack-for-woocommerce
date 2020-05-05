@@ -72,19 +72,6 @@ class Repack_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Repack_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Repack_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/repack-admin.css', array(), $this->version, 'all' );
 	}
 
@@ -94,19 +81,6 @@ class Repack_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Repack_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Repack_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/repack-admin.js', array( 'jquery' ), $this->version, false );
 	}
 
@@ -118,10 +92,17 @@ class Repack_Admin {
 	 * @return bool
 	 */
 	public function is_repack_order( $order ) {
-		return get_post_meta( $order->id, $this->meta_name, true );
+		return wc_string_to_bool( get_post_meta( $order->id, '_' . $this->meta_name, true ) );
 	}
 
 
+	/**
+	 * Admin notice about resuing packaging
+	 *
+	 * @param $order
+	 *
+	 * @return bool|string|void
+	 */
 	public function get_order_repack_decision( $order ) {
 		if ( $this->is_repack_order( $order ) ) {
 			return __( 'Shipping with reused packaging preferred!', 'stage' );
@@ -131,15 +112,19 @@ class Repack_Admin {
 	}
 
 
+	/**
+	 * RePack section in order overwiew
+	 *
+	 * @param $order
+	 */
 	public function add_order_details( $order ) {
-
 		if ( $this->is_repack_order( $order ) ) { ?>
 			<div class="clear"></div>
-			<h3><?php _e( 'Reused Packaging', 'repack' ); ?></h3>
+			<h3><?php esc_html_e( 'Reuse Packaging', 'repack' ); ?></h3>
 			<div class="repack">
 				<p class="form-field form-field-wide">
 					<strong>
-						<?php echo $this->get_order_repack_decision( $order ); ?>
+						<?php echo esc_html( $this->get_order_repack_decision( $order ) ); ?>
 					</strong>
 				</p>
 			</div>
@@ -148,6 +133,13 @@ class Repack_Admin {
 		}
 	}
 
+	/**
+	 * Add RePack field to order shipping details
+	 *
+	 * @param $fields
+	 *
+	 * @return mixed
+	 */
 	public function add_shipping_field( $fields ) {
 
 		$fields['repack'] = array(
@@ -162,6 +154,12 @@ class Repack_Admin {
 
 	/**
 	 * Add a custom field to WC emails
+	 *
+	 * @param $fields
+	 * @param $sent_to_admin
+	 * @param $order
+	 *
+	 * @return mixed
 	 */
 	public function add_field_to_emails( $fields, $sent_to_admin, $order ) {
 

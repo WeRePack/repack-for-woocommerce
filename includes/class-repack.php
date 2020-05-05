@@ -120,7 +120,7 @@ class Repack {
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-repack-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-repack-localization.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -147,7 +147,7 @@ class Repack {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Repack_i18n();
+		$plugin_i18n = new Repack_Localization();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
@@ -163,8 +163,10 @@ class Repack {
 
 		$plugin_admin = new Repack_Admin( $this->get_plugin_name(), $this->get_version(), $this->meta_name );
 
+		/* todo: Use the loader for Gutenberg
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		*/
 
 		$this->loader->add_action( 'woocommerce_admin_order_data_after_shipping_address', $plugin_admin, 'add_order_details' );
 		$this->loader->add_filter( 'woocommerce_admin_shipping_fields', $plugin_admin, 'add_shipping_field' );
@@ -249,6 +251,6 @@ class Repack {
 	 * @return bool
 	 */
 	public function is_wc_active() {
-		return in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) );
+		return in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true );
 	}
 }
