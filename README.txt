@@ -38,6 +38,11 @@ Install the plugin either via WordPress or as a composer package via `composer r
 
 The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new copuon named 'WeRePack', it will be added or removed automatically when you select the RePack checkbox. If you want to name coupon differently, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
 
+= How to use the shortcode =
+
+Use the shortcode wherever you want with `[repack]`. This will output the amount of packaging the shop saved in total. You can prepend and append text to that number with attributes: `[repack prepend="Wow! We already saved " append=" packaging so far"]`.
+if you additionally set the attribute `user_id` the amount of packaging a single user has saved will be displayed. A neat way to further motivate recurring users: `[repack user_id="123" prepend="Thank you! Together we already saved " append=" packaging."]`
+
 == Screenshots ==
 
 1. Checkbox animation
