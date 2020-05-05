@@ -1,114 +1,53 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://ouun.io
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+=== RePack - Reuse Packaging for WooCommerce ===
+Contributors: werepack, ouun, philippmuenchen
+Donate link: https://www.paypal.me/ouun
+Tags: woocommerce, shipping, sustainability
+Requires at least: 4.0.0
+Tested up to: 5.4.1
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Ask for customer permission to ship reused shipping packaging. Show your support for a more sustainable ecommerce, reduce waste, save money and be part of the WeRePack.org initiative.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+This plugin is part of the WeRePack.org initiative to avoid packaging waste and helps shop owners and their customers save resources.
+To do this, the plugin adds a field in the WooCommerce payment process where customers can give their consent to receive reused shipping packaging. So simple, so effective. And with lots of customization options, let us know if there's anything else you need.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+**Current features**
+* Checkbox in payment process with subtle animation
+* Reward with a voucher: Shop owners can create a voucher to encourage customers and share the savings. To do this, simply create an ordinary WooCommerce voucher called 'WeRePack'.
+* Registered users can set their default value in the WooCommerce Dashboard.
+* The shortcode `[repack]` shows the total number of shipping packages saved.
 
-A few notes about the sections above:
+**Coming soon**
+* Gutenberg Block, which visually represents the savings to date.
+* Be listed as a supporter on the initiative's website.
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
-
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+**Missing something?**
+Write us what else is needed to make your shop more sustainable. Whatever it is, we will do our best to get as many shops as possible to join the initiative.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `repack.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+Install the plugin either via WordPress or as a composer package via `composer require ouun/wc-repack`
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How to set up and customize the coupon code =
 
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new copuon named 'WeRePack', it will be added or removed automatically when you select the RePack checkbox. If you want to name coupon differently, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Checkbox animation
+2. Shipping notice in WooCommerce Order Overview
 
 == Changelog ==
 
 = 1.0 =
-* A change since the previous version.
-* Another change.
+* Hello World!
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+== About WeRePack.org Initiative ==
 
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+Learn more about the initiative on [WeRePack.org](https://werepack.org/ "The WeRePack Initiative") and join us.
