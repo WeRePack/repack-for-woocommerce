@@ -87,6 +87,7 @@ class Repack_Public {
 			'repack',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'security' => wp_create_nonce( 'repack_ajax_nonce' ),
 			)
 		);
 	}
@@ -204,10 +205,6 @@ class Repack_Public {
 	public function repack_apply_coupon( $value ) {
 		global $woocommerce;
 
-		if ( ! $value ) {
-			$value = $_POST['shipping_repack'];
-		}
-
 		// Customizable coupon name via 'repack_coupon_name' filter
 		$coupon = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
 
@@ -241,6 +238,29 @@ class Repack_Public {
 				);
 			}
 		}
+
+	}
+
+	/**
+	 * AJAX Apply RePack Coupon
+	 */
+	public function repack_checkout_apply_coupon() {
+		if ( $this->repack_coupon_exists() ) {
+			try {
+				$nonce_value = wc_get_var( $_REQUEST['woocommerce-process-checkout-nonce'], wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
+
+				if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
+					WC()->session->set( 'refresh_totals', true );
+					throw new Exception( __( 'We were unable to process your order, please try again.', 'stage' ) );
+				}
+
+				// Run coupon logic with checkbox value
+				$this->repack_apply_coupon( $_POST['shipping_repack'] );
+
+			} catch ( Exception $e ) {
+				wc_add_notice( $e->getMessage(), 'error' );
+			}
+		}
 	}
 
 	/**
@@ -248,14 +268,16 @@ class Repack_Public {
 	 */
 	public function repack_ajax_apply_coupon() {
 
-		// Fail early
-		if ( $this->repack_coupon_exists() ) {
-			// Parse fields
-			$values = array();
-			parse_str( $_POST['post_data'], $values );
+		if ( check_ajax_referer( 'repack_ajax_nonce', 'nonce_token' ) ) {
+			// Fail early
+			if ( $this->repack_coupon_exists() ) {
+				// Parse fields
+				$values = array();
+				parse_str( $_POST['post_data'], $values );
 
-			// Run coupon logic with checkbox value
-			$this->repack_apply_coupon( $values['shipping_repack'] );
+				// Run coupon logic with checkbox value
+				$this->repack_apply_coupon( $values['shipping_repack'] );
+			}
 		}
 
 		// Die
