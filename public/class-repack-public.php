@@ -313,6 +313,28 @@ class Repack_Public {
 	}
 
 	/**
+	 * Get total amount of repacked packages
+	 *
+	 * @return bool|mixed|void
+	 */
+	public function get_global_reoack_counter() {
+		return get_option( 'repack_counter' );
+	}
+
+	/**
+	 * Get total amount of repacked packages
+	 *
+	 * @return bool|mixed|void
+	 */
+	public function get_user_reoack_counter( $user_id ) {
+		return get_user_meta(
+			$user_id,
+			$this->meta_name,
+			true
+		);
+	}
+
+	/**
 	 * Save data to order and clients user meta
 	 *
 	 * @param WC_Order $order
@@ -339,13 +361,43 @@ class Repack_Public {
 			update_user_meta( $order->get_customer_id(), $this->meta_name, $_POST['shipping_repack'] );
 			update_user_meta(
 				$order->get_customer_id(),
-				$this->meta_name . '_counter',
+				$this->meta_name,
 				(int) get_user_meta(
 					$order->get_customer_id(),
-					'repack_counter',
+					$this->meta_name,
 					true
 				) + absint( $_POST['repack_counter'] )
 			);
 		}
+	}
+
+	/**
+	 * RePack Shortcode
+	 *
+	 * @return string
+	 */
+	public function repack_shortcode() {
+		add_shortcode(
+			'repack',
+			function( $atts ) {
+				// Extract attributes
+				$atts = shortcode_atts(
+					array(
+						'prepend' => '',
+						'append'  => '',
+						'user_id' => null,
+
+					),
+					$atts,
+					'repack'
+				);
+
+				if ( $atts['user_id'] ) {
+					return $atts['prepend'] . $this->get_user_reoack_counter( (int) $atts['user_id'] ) . $atts['append'];
+				}
+
+				return $atts['prepend'] . $this->get_global_reoack_counter() . $atts['append'];
+			}
+		);
 	}
 }

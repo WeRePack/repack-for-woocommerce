@@ -188,6 +188,9 @@ class Repack {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// Register RePack shortcode
+		$this->loader->add_action( 'init', $plugin_public, 'repack_shortcode' );
+
 		// Add RePack field to checkout and user shipping settings
 		$this->loader->add_action( 'woocommerce_after_order_notes', $plugin_public, 'add_checkout_repack_field', 20, 1 );
 		$this->loader->add_filter( 'woocommerce_shipping_fields', $plugin_public, 'add_shipping_repack_field', 20, 1 );
