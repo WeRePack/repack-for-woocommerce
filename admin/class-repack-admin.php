@@ -143,10 +143,15 @@ class Repack_Admin {
 	public function add_shipping_field( $fields ) {
 
 		$fields['repack'] = array(
-			'label' => __( 'Reused Packaging', 'repack' ),
-			'type'  => 'checkbox',
-			'show'  => false,
-			'value' => 'test',
+			'label'   => __( 'Reuse Packaging', 'repack' ),
+			'type'    => 'select',
+			'class'   => 'js_field-repack select short',
+			'options' => array(
+				''    => __( 'Reuse Packaging', 'repack' ),
+				'yes' => 'yes',
+				'no'  => 'No',
+			),
+			'show'    => false,
 		);
 
 		return $fields;
