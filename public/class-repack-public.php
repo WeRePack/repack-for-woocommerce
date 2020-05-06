@@ -354,6 +354,9 @@ class Repack_Public {
 			// Save order meta & count saved packages
 			$order->update_meta_data( '_' . $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
 
+			// Add order note
+			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'stage' ), true, false );
+
 			// Update global RePack counter
 			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );
 
