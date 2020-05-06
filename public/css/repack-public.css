@@ -16,7 +16,8 @@
   opacity: 1 !important; }
 
 #shipping_repack_field label {
-  position: relative; }
+  position: relative;
+  z-index: 0; }
   #shipping_repack_field label input[name="shipping_repack"] ~ span.celebrate-repack {
     align-self: center;
     position: absolute;
