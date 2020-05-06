@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://ouun.io
+ * @link       https://WeRePack.org
  * @since      1.0.0
  *
  * @package    Repack

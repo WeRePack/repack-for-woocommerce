@@ -3,22 +3,17 @@
 /**
  * RePack bootstrap file
  *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              https://ouun.io
+ * @link              https://WeRePack.org
  * @since             1.0.0
  * @package           Repack
  *
  * @wordpress-plugin
- * Plugin Name:       RePack - Reuse Packaging for WooCommerce
- * Plugin URI:        https://ouun.io/plugins/repack
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       RePack - Reuse Packaging for eCommerce
+ * Plugin URI:        https://WeRePack.org/download
+ * Description:       Get permission from your customers to reuse already used shipping packaging. As a shop owner it is an easy way to save resources, money and above all to protect the environment.
  * Version:           1.0.0
- * Author:            Philipp Wellmer/ouun.io
- * Author URI:        https://ouun.io
+ * Author:            Philipp Wellmer/WeRePack.org
+ * Author URI:        https://WeRePack.org
  * Text Domain:       repack
  * Domain Path:       /languages
  *

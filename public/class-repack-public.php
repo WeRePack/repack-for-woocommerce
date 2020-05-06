@@ -3,7 +3,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://ouun.io
+ * @link       https://WeRePack.org
  * @since      1.0.0
  *
  * @package    Repack

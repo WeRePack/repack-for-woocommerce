@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://ouun.io
+ * @link       https://WeRePack.org
  * @since      1.0.0
  *
  * @package    Repack

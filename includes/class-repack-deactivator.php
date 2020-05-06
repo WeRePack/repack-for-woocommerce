@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://ouun.io
+ * @link       https://WeRePack.org
  * @since      1.0.0
  *
  * @package    Repack

@@ -1,4 +1,4 @@
-=== RePack - Reuse Packaging for WooCommerce ===
+=== RePack - Reuse Packaging for eCommerce ===
 Contributors: werepack, ouun, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, sustainability
