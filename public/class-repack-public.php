@@ -276,7 +276,7 @@ class Repack_Public {
 				parse_str( $_POST['post_data'], $values );
 
 				// Run coupon logic with checkbox value
-				$this->repack_apply_coupon( $values['shipping_repack'] );
+				$this->repack_apply_coupon( ! isset( $values['shipping_repack'] ) ? false : true );
 			}
 		}
 
