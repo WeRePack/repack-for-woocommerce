@@ -61,6 +61,7 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 = 1.0 =
 * Hello World!
+* Contains all features as explained in Readme
 
 == About WeRePack.org Initiative ==
 
