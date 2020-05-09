@@ -70,6 +70,9 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixing version numbers.
+
 = 1.0.1 =
 * Fix overseen PHP error calling $order->id directly
 * Adds all available filters to Readme
