@@ -17,25 +17,29 @@ This plugin is part of the WeRePack.org initiative to avoid packaging waste and 
 To do this, the plugin adds a field in the WooCommerce payment process where customers can give their consent to receive reused shipping packaging. So simple, so effective. And with lots of customization options via filters, let us know if there's anything else you need.
 
 **Current features**
-* Checkbox in payment process with subtle animation
-* Reward with a voucher: Shop owners can create a voucher to encourage customers and share the savings. To do this, simply create an ordinary WooCommerce voucher called 'WeRePack'.
-* Registered users can set their default value in the WooCommerce Dashboard.
-* The shortcode `[repack]` shows the total number of shipping packages saved.
+
+*   Checkbox in payment process with subtle animation
+*   Reward with a voucher: Shop owners can create a voucher to encourage customers and share the savings. To do this, simply create an ordinary WooCommerce voucher called 'WeRePack'.
+*   Registered users can set their default value in the WooCommerce Dashboard.
+*   The shortcode `[repack]` shows the total number of shipping packages saved.
 
 **Coming soon**
-* Gutenberg Block, which visually represents the savings to date.
-* Be listed as a supporter on the initiative's website.
+
+*   Gutenberg Block, which visually represents the savings to date.
+*   Be listed as a supporter on the initiative's website.
 
 **Available Filters**
+
 You can customize the plugin behavior and text by using the following filters in your themes `functions.php` or `/mu-plugins/wc-repack.php` file:
-* `repack_coupon_name`: Name of the coupon code to apply. Default is `WeRePack`
-* `repack_consent_field_label`: Label of the consent checkbox
-* `repack_consent_field_description`: Description of the consent checkbox
-* `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox
-* `repack_coupon_removed_applied_text`: Notice text after coupon was applied
-* `repack_coupon_removed_notice_text`: Notice text after coupon was removed
-* `repack_email_label`: Label in WooCommerce mails if consent was given
-* `repack_email_text`: Text in WooCommerce mails if consent was given
+
+*   `repack_coupon_name`: Name of the coupon code to apply. Default is `WeRePack`
+*   `repack_consent_field_label`: Label of the consent checkbox
+*   `repack_consent_field_description`: Description of the consent checkbox
+*   `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox
+*   `repack_coupon_removed_applied_text`: Notice text after coupon was applied
+*   `repack_coupon_removed_notice_text`: Notice text after coupon was removed
+*   `repack_email_label`: Label in WooCommerce mails if consent was given
+*   `repack_email_text`: Text in WooCommerce mails if consent was given
 
 **Missing something?**
 Write us what else is needed to make your shop more sustainable. Whatever it is, we will do our best to get as many shops as possible to join the initiative.
