@@ -1,10 +1,11 @@
-=== RePack - Reuse Packaging for eCommerce ===
-Contributors: werepack, ouun, philippmuenchen
+=== RePack - Reuse Packaging for WooCommerce ===
+Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, sustainability
 Requires at least: 4.0.0
 Tested up to: 5.4.1
 Stable tag: 1.0
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +14,7 @@ Ask for customer permission to ship reused shipping packaging. Show your support
 == Description ==
 
 This plugin is part of the WeRePack.org initiative to avoid packaging waste and helps shop owners and their customers save resources.
-To do this, the plugin adds a field in the WooCommerce payment process where customers can give their consent to receive reused shipping packaging. So simple, so effective. And with lots of customization options, let us know if there's anything else you need.
+To do this, the plugin adds a field in the WooCommerce payment process where customers can give their consent to receive reused shipping packaging. So simple, so effective. And with lots of customization options via filters, let us know if there's anything else you need.
 
 **Current features**
 * Checkbox in payment process with subtle animation
@@ -34,9 +35,13 @@ Install the plugin either via WordPress or as a composer package via `composer r
 
 == Frequently Asked Questions ==
 
-= How to set up and customize the coupon code =
+= Am I forced to give a discount? =
 
-The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new copuon named 'WeRePack', it will be added or removed automatically when you select the RePack checkbox. If you want to name coupon differently, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
+No! You are not! But you can show your good will and that you are not taking part to maximize profit, but to support the initiative and environment.
+
+= How to set up and customize a coupon code =
+
+The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new coupon named 'WeRePack', it will be added or removed automatically when you select the RePack checkbox. If you want to name coupon differently, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
 
 = How to use the shortcode =
 
@@ -45,7 +50,7 @@ if you additionally set the attribute `user_id` the amount of packaging a single
 
 == Screenshots ==
 
-1. Checkbox animation
+1. Checkbox animation, adapts your Theme Design
 2. Shipping notice in WooCommerce Order Overview
 
 == Changelog ==
