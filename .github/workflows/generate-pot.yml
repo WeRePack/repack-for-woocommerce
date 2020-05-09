@@ -3,7 +3,7 @@ name: Create Localization Files
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   WP_POT_Generator:

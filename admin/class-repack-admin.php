@@ -70,12 +70,12 @@ class Repack_Admin {
 	/**
 	 * Get RePack order meta
 	 *
-	 * @param $order
+	 * @param WC_Order $order
 	 *
 	 * @return bool
 	 */
 	public function is_repack_order( $order ) {
-		return wc_string_to_bool( get_post_meta( $order->id, '_' . $this->meta_name, true ) );
+		return wc_string_to_bool( get_post_meta( $order->get_id(), '_' . $this->meta_name, true ) );
 	}
 
 
