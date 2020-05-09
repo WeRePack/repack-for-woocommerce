@@ -163,11 +163,6 @@ class Repack {
 
 		$plugin_admin = new Repack_Admin( $this->get_plugin_name(), $this->get_version(), $this->meta_name );
 
-		/* todo: Use the loader for Gutenberg
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		*/
-
 		$this->loader->add_action( 'woocommerce_admin_order_data_after_shipping_address', $plugin_admin, 'add_order_details' );
 		$this->loader->add_filter( 'woocommerce_admin_shipping_fields', $plugin_admin, 'add_shipping_field' );
 
