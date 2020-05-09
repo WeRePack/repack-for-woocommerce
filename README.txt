@@ -65,7 +65,7 @@ if you additionally set the attribute `user_id` the amount of packaging a single
 
 = I like the initiative and want to support you =
 
-Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/wc-repack "RePack on GitHub"), translate the plugin. We really appreciate every support.
+Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/repack-for-woocommerce "RePack on GitHub"), translate the plugin. We really appreciate every support.
 
 == Screenshots ==
 

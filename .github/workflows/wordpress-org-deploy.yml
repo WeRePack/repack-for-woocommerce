@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }} on Stage
+          release_name: ${{ github.ref }}
           body: Find the Changelog at https://wordpress.org/plugins/repack-for-woocommerce/
           draft: false
           prerelease: false
