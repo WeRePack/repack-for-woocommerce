@@ -51,6 +51,15 @@ class Repack_Public {
 	protected $meta_name;
 
 	/**
+	 * The coupon name.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $coupon_name   The coupon name.
+	 */
+	protected $coupon_name;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @param string $plugin_name The name of the plugin.
@@ -64,6 +73,7 @@ class Repack_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->meta_name   = $meta_name;
+		$this->coupon_name = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
 	}
 
 	/**
@@ -161,7 +171,17 @@ class Repack_Public {
 					</strong>
 				</p>
 				<div class="woocommerce-additional-fields__field-wrapper">
-					<?php echo esc_html( woocommerce_form_field( 'shipping_repack', $this->get_repack_form_field_args( array( 'clear' => true ) ), $checkout->get_value( 'shipping_repack' ) ) ); ?>
+					<?php
+					echo esc_html(
+						woocommerce_form_field(
+							'shipping_repack',
+							$this->get_repack_form_field_args(
+								array( 'clear' => true )
+							),
+							$checkout->get_value( 'shipping_repack' ) || $woocommerce->cart->has_discount( $this->coupon_name )
+						)
+					);
+					?>
 					<?php
 					echo esc_html(
 						woocommerce_form_field(
@@ -208,17 +228,14 @@ class Repack_Public {
 	public function repack_apply_coupon( $value ) {
 		global $woocommerce;
 
-		// Customizable coupon name via 'repack_coupon_name' filter
-		$coupon = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
-
 		// Fail early
 		if ( ! $this->repack_coupon_exists() ) {
 			return;
 		}
 
-		if ( isset( $value ) && $value && ! $woocommerce->cart->has_discount( $coupon ) ) {
+		if ( isset( $value ) && $value && ! $woocommerce->cart->has_discount( $this->coupon_name ) ) {
 			// Add coupon and show notice on success
-			if ( $woocommerce->cart->apply_coupon( $coupon ) ) {
+			if ( $woocommerce->cart->apply_coupon( $this->coupon_name ) ) {
 				wc_clear_notices();
 				wc_add_notice(
 					apply_filters(
@@ -232,9 +249,9 @@ class Repack_Public {
 					'success'
 				);
 			}
-		} elseif ( ! $value && $woocommerce->cart->has_discount( $coupon ) ) {
+		} elseif ( ! $value && $woocommerce->cart->has_discount( $this->coupon_name ) ) {
 			// Remove coupon and show notice on success
-			if ( $woocommerce->cart->remove_coupon( $coupon ) ) {
+			if ( $woocommerce->cart->remove_coupon( $this->coupon_name ) ) {
 				wc_clear_notices();
 				wc_add_notice(
 					apply_filters(
@@ -299,10 +316,7 @@ class Repack_Public {
 	 * @return bool
 	 */
 	public function repack_coupon_exists() {
-		// Customizable coupon name via 'repack_coupon_name' filter
-		$coupon = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
-
-		return wc_get_coupon_id_by_code( $coupon ) > 0;
+		return wc_get_coupon_id_by_code( $this->coupon_name ) > 0;
 	}
 
 
