@@ -73,7 +73,7 @@ class Repack_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->meta_name   = $meta_name;
-		$this->coupon_name = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
+
 	}
 
 	/**
@@ -100,6 +100,13 @@ class Repack_Public {
 				'security' => wp_create_nonce( 'repack_ajax_nonce' ),
 			)
 		);
+	}
+
+	/**
+	 * Set the Coupon name for further usage
+	 */
+	public function repack_set_coupon_name() {
+		$this->coupon_name = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
 	}
 
 	/**

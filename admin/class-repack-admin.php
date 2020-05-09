@@ -130,9 +130,9 @@ class Repack_Admin {
 			'type'    => 'select',
 			'class'   => 'js_field-repack select short',
 			'options' => array(
-				''    => __( 'Reuse Packaging', 'repack' ),
-				'yes' => 'yes',
-				'no'  => 'No',
+				''    => __( 'Please choose', 'repack' ),
+				'yes' => __( 'Yes', 'repack' ),
+				'no'  => __( 'No', 'repack' ),
 			),
 			'show'    => false,
 		);
