@@ -1,7 +1,7 @@
 === RePack - Reuse Packaging for WooCommerce ===
 Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
-Tags: woocommerce, shipping, sustainability
+Tags: woocommerce, shipping, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
 Tested up to: 5.4.1
 Stable tag: 1.0
@@ -25,6 +25,17 @@ To do this, the plugin adds a field in the WooCommerce payment process where cus
 **Coming soon**
 * Gutenberg Block, which visually represents the savings to date.
 * Be listed as a supporter on the initiative's website.
+
+**Available Filters**
+You can customize the plugin behavior and text by using the following filters in your themes `functions.php` or `/mu-plugins/wc-repack.php` file:
+* `repack_coupon_name`: Name of the coupon code to apply. Default is `WeRePack`
+* `repack_consent_field_label`: Label of the consent checkbox
+* `repack_consent_field_description`: Description of the consent checkbox
+* `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox
+* `repack_coupon_removed_applied_text`: Notice text after coupon was applied
+* `repack_coupon_removed_notice_text`: Notice text after coupon was removed
+* `repack_email_label`: Label in WooCommerce mails if consent was given
+* `repack_email_text`: Text in WooCommerce mails if consent was given
 
 **Missing something?**
 Write us what else is needed to make your shop more sustainable. Whatever it is, we will do our best to get as many shops as possible to join the initiative.
@@ -59,7 +70,11 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+* Fix overseen PHP error calling $order->id directly
+* Adds all available filters to Readme
+
+= 1.0.0 =
 * Hello World!
 * Contains all features as explained in Readme
 
