@@ -8,6 +8,7 @@ jobs:
     name: Release new tagged version
     runs-on: ubuntu-latest
     steps:
+      # Release on WordPress.org
       - uses: actions/checkout@master
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@master
@@ -15,3 +16,36 @@ jobs:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SLUG: repack-for-woocommerce
+
+      # Build Release Zip for GitHub
+      - name: ZIP Release
+        uses: thedoctor0/zip-release@master
+        with:
+          path: '.'
+          filename: 'werepack.zip'
+          exclusions: '*.git* *.circleci* *.DS_Store* .wordpress-org .gitattributes .gitignore .distignore'
+
+      # Create GitHub Release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }} on Stage
+          body: ${{ steps.changelog_reader.outputs.log_entry }} # This pulls from the GET CHANGELOG ENTRY step above, referencing it's ID to get its outputs object, which include a `log_entry`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          draft: false
+          prerelease: false
+
+      # One ZIP upload directly to Release
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./werepack.zip
+          asset_name: repack-for-woocommerce.zip
+          asset_content_type: application/zip
