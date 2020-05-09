@@ -1,5 +1,5 @@
 {
-    "name": "ouun/wc-repack",
+    "name": "ouun/repack-for-woocommerce",
     "description": "Get permission from your customers to reuse already used shipping packaging. As a shop owner it is an easy way to save resources, money and above all to protect the environment.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
