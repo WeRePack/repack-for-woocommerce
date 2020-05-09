@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Philipp Wellmer/WeRePack.org
+# Copyright (C) 2020 WeRePack.org
 # This file is distributed under the same license as the RePack - Reuse Packaging for WooCommerce plugin.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-09T14:45:42+00:00\n"
+"POT-Creation-Date: 2020-05-09T15:03:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: repack\n"
@@ -27,7 +27,7 @@ msgid "Get permission from your customers to reuse already used shipping packagi
 msgstr ""
 
 #. Author of the plugin
-msgid "Philipp Wellmer/WeRePack.org"
+msgid "WeRePack.org"
 msgstr ""
 
 #. Author URI of the plugin
