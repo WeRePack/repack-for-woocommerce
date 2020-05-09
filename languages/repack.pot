@@ -9,7 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2020-05-09T15:58:19+00:00\n"
+=======
+"POT-Creation-Date: 2020-05-09T15:03:02+00:00\n"
+>>>>>>> 💬 #10 - WP POT File Updated / ⚡ Triggered By 71642ccfa92b14ed350fc26452331a879958adfc
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: repack\n"
