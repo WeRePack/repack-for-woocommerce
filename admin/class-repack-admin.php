@@ -88,7 +88,7 @@ class Repack_Admin {
 	 */
 	public function get_order_repack_decision( $order ) {
 		if ( $this->is_repack_order( $order ) ) {
-			return __( 'Shipping with reused packaging preferred!', 'stage' );
+			return __( 'Shipping with reused packaging preferred!', 'repack' );
 		} else {
 			return $this->is_repack_order( $order );
 		}

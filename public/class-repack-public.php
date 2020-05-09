@@ -240,7 +240,7 @@ class Repack_Public {
 					apply_filters(
 						'repack_coupon_applied_notice_text',
 						sprintf(
-							__( 'Your discount for reusing packaging has been removed.', 'woocommerce' )
+							__( 'Your discount for reusing packaging has been removed.', 'repack' )
 						)
 					),
 					'notice'
@@ -260,7 +260,7 @@ class Repack_Public {
 
 				if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
 					WC()->session->set( 'refresh_totals', true );
-					throw new Exception( __( 'We were unable to process your order, please try again.', 'stage' ) );
+					throw new Exception( __( 'We were unable to process your order, please try again.', 'repack' ) );
 				}
 
 				// Run coupon logic with checkbox value
@@ -356,7 +356,7 @@ class Repack_Public {
 
 		if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
 			WC()->session->set( 'refresh_totals', true );
-			throw new Exception( __( 'We were unable to process your order, please try again.', 'stage' ) );
+			throw new Exception( __( 'We were unable to process your order, please try again.', 'repack' ) );
 		}
 
 		if ( isset( $_POST['shipping_repack'] ) && isset( $_POST['repack_counter'] ) && ! empty( $_POST['shipping_repack'] ) && ! empty( $_POST['repack_counter'] ) ) {
@@ -364,7 +364,7 @@ class Repack_Public {
 			$order->update_meta_data( '_' . $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
 
 			// Add order note
-			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'stage' ), true, false );
+			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'repack' ), true, false );
 
 			// Update global RePack counter
 			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );

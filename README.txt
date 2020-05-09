@@ -48,6 +48,10 @@ The plugin gives you maximum flexibility and accepts all WooCommerce coupons tha
 Use the shortcode wherever you want with `[repack]`. This will output the amount of packaging the shop saved in total. You can prepend and append text to that number with attributes: `[repack prepend="Wow! We already saved " append=" packaging so far"]`.
 if you additionally set the attribute `user_id` the amount of packaging a single user has saved will be displayed. A neat way to further motivate recurring users: `[repack user_id="123" prepend="Thank you! Together we already saved " append=" packaging."]`
 
+= I like the initiative and want to support you =
+
+Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/wc-repack "RePack on GitHub"), translate the plugin. We really appreciate every support.
+
 == Screenshots ==
 
 1. Checkbox animation, adapts your Theme Design
