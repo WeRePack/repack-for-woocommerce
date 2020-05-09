@@ -66,23 +66,6 @@ class Repack_Admin {
 		$this->meta_name   = $meta_name;
 	}
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/repack-admin.css', array(), $this->version, 'all' );
-	}
-
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/repack-admin.js', array( 'jquery' ), $this->version, false );
-	}
 
 	/**
 	 * Get RePack order meta
@@ -170,8 +153,8 @@ class Repack_Admin {
 
 		if ( $this->is_repack_order( $order ) ) {
 			$fields[ $this->meta_name ] = array(
-				'label' => __( 'Reused Packaging', 'repack' ),
-				'value' => __( 'Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available.', 'repack' ),
+				'label' => apply_filters( 'repack_email_label', __( 'Reused Packaging', 'repack' ) ),
+				'value' => apply_filters( 'repack_email_text', __( 'Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available.', 'repack' ) ),
 			);
 		}
 

@@ -103,11 +103,14 @@ class Repack_Public {
 	private function get_repack_form_field_args( $args = array() ) {
 		$merged_args = array_merge(
 			array(
-				'label'       => __( 'Yes, please reuse packaging if available.', 'repack' ),
-				'description' => sprintf(
-				/* translators: %s: WeRePack website link */
-					__( 'Help us to protect the environment. With your consent we will prefere already used shipping packaging for your order. Learn more about the initiative on %s.', 'repack' ),
-					'<a href="https://werepack.org/" target="_blank">WeRePack.org</a>'
+				'label'       => apply_filters( 'repack_consent_field_label', __( 'Yes, please reuse packaging if available.', 'repack' ) ),
+				'description' => apply_filters(
+					'repack_consent_field_description',
+					sprintf(
+					/* translators: %s: WeRePack website link */
+						__( 'With your consent we prefer already used shipping packaging. Help us protect the environment and learn more about the initiative on %s.', 'repack' ),
+						'<a href="https://werepack.org/" target="_blank">WeRePack.org</a>'
+					)
 				),
 				'type'        => 'checkbox',
 				'required'    => false,
@@ -120,7 +123,7 @@ class Repack_Public {
 			$args
 		);
 
-		return apply_filters( 'repack_form_field_args', $merged_args );
+		return apply_filters( 'repack_consent_field_args', $merged_args );
 	}
 
 	/**
@@ -146,8 +149,8 @@ class Repack_Public {
 							esc_html(
 							/* translators: %s: Amount of packaging to send */
 								_n(
-									'Saving %s more packaging',
-									'Saving %s more packaging',
+									'%s packaging can be saved',
+									'%s packaging can be saved',
 									count( $cart->get_shipping_packages() ),
 									'repack'
 								)
@@ -218,10 +221,13 @@ class Repack_Public {
 			if ( $woocommerce->cart->apply_coupon( $coupon ) ) {
 				wc_clear_notices();
 				wc_add_notice(
-					sprintf(
-					/* translators: %s: Thank You */
-						__( 'Your discount for reusing packaging has been applied. %s', 'repack' ),
-						'<strong>' . __( 'Thank you!', 'repack' ) . '</strong>'
+					apply_filters(
+						'repack_coupon_removed_notice_text',
+						sprintf(
+						/* translators: %s: Thank You */
+							__( 'Your discount for reusing packaging has been applied. %s', 'repack' ),
+							'<strong>' . __( 'Thank you!', 'repack' ) . '</strong>'
+						)
 					),
 					'success'
 				);
@@ -231,8 +237,11 @@ class Repack_Public {
 			if ( $woocommerce->cart->remove_coupon( $coupon ) ) {
 				wc_clear_notices();
 				wc_add_notice(
-					sprintf(
-						__( 'Your discount for reusing packaging has been removed.', 'woocommerce' )
+					apply_filters(
+						'repack_coupon_applied_notice_text',
+						sprintf(
+							__( 'Your discount for reusing packaging has been removed.', 'woocommerce' )
+						)
 					),
 					'notice'
 				);
@@ -377,29 +386,29 @@ class Repack_Public {
 	/**
 	 * RePack Shortcode
 	 *
-	 * @return string
+	 * @return void
 	 */
 	public function repack_shortcode() {
 		add_shortcode(
 			'repack',
-			function( $atts ) {
+			function( $attributes ) {
 				// Extract attributes
-				$atts = shortcode_atts(
+				$attributes = shortcode_atts(
 					array(
 						'prepend' => '',
 						'append'  => '',
 						'user_id' => null,
 
 					),
-					$atts,
+					$attributes,
 					'repack'
 				);
 
-				if ( $atts['user_id'] ) {
-					return $atts['prepend'] . $this->get_user_reoack_counter( (int) $atts['user_id'] ) . $atts['append'];
+				if ( $attributes['user_id'] ) {
+					return $attributes['prepend'] . $this->get_user_reoack_counter( (int) $attributes['user_id'] ) . $attributes['append'];
 				}
 
-				return $atts['prepend'] . $this->get_global_reoack_counter() . $atts['append'];
+				return $attributes['prepend'] . $this->get_global_reoack_counter() . $attributes['append'];
 			}
 		);
 	}
