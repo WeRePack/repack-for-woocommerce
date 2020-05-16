@@ -75,6 +75,9 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 == Changelog ==
 
+= 1.0.5 =
+* WordPress.org Repo: Fix version
+
 = 1.0.4 =
 * Adds filter `repack_checkout_consent_position`: Allows changing the consent position.
 * Adds filter `repack_checkout_consent_default_state`: Allows changing the consent default value.
