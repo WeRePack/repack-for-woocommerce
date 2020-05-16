@@ -32,6 +32,7 @@ To do this, the plugin adds a field in the WooCommerce payment process where cus
 
 You can customize the plugin behavior and text by using the following filters in your themes `functions.php` or `/mu-plugins/wc-repack.php` file:
 
+*   `repack_checkout_consent_position`: Position of the consent, default is `woocommerce_after_order_notes`
 *   `repack_coupon_name`: Name of the coupon code to apply. Default is `WeRePack`
 *   `repack_consent_field_label`: Label of the consent checkbox
 *   `repack_consent_field_description`: Description of the consent checkbox
@@ -65,7 +66,7 @@ if you additionally set the attribute `user_id` the amount of packaging a single
 
 = I like the initiative and want to support you =
 
-Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/wc-repack "RePack on GitHub"), translate the plugin. We really appreciate every support.
+Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/repack-for-woocommerce "RePack on GitHub"), translate the plugin. We really appreciate every support.
 
 == Screenshots ==
 
@@ -73,6 +74,11 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 2. Shipping notice in WooCommerce Order Overview
 
 == Changelog ==
+
+= 1.0.4 =
+* Adds filter `repack_checkout_consent_position`: Allows changing the consent position.
+* Adds filter `repack_checkout_consent_default_state`: Allows changing the consent default value.
+* Fixes user repack counter
 
 = 1.0.3 =
 * Minor bug fix.

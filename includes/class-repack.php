@@ -190,8 +190,18 @@ class Repack {
 		$this->loader->add_action( 'init', $plugin_public, 'repack_set_coupon_name' );
 
 		// Add RePack field to checkout and user shipping settings
-		$this->loader->add_action( 'woocommerce_after_order_notes', $plugin_public, 'add_checkout_repack_field', 20, 1 );
 		$this->loader->add_filter( 'woocommerce_shipping_fields', $plugin_public, 'add_shipping_repack_field', 20, 1 );
+		$this->loader->add_filter( 'woocommerce_checkout_get_value', $plugin_public, 'repack_checkout_consent_value', 10, 2 );
+		$this->loader->add_action(
+			apply_filters(
+				'repack_checkout_consent_position',
+				'woocommerce_after_order_notes'
+			),
+			$plugin_public,
+			'add_checkout_repack_field',
+			20,
+			1
+		);
 
 		// Apply Coupon
 		$this->loader->add_action( 'woocommerce_checkout_process', $plugin_public, 'repack_checkout_apply_coupon', 20, 1 );

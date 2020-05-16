@@ -185,7 +185,8 @@ class Repack_Public {
 							$this->get_repack_form_field_args(
 								array( 'clear' => true )
 							),
-							$checkout->get_value( 'shipping_repack' ) || $woocommerce->cart->has_discount( $this->coupon_name )
+							// todo: $checkout is not available outside the fields form, what if position is e.g. 'woocommerce_review_order_before_submit'? Currently null.
+							is_object( $checkout ) ? $checkout->get_value( 'shipping_repack' ) : null
 						)
 					);
 					?>
@@ -208,6 +209,45 @@ class Repack_Public {
 	}
 
 	/**
+	 * Filters $checkout->get_value() to set default checkbox state
+	 *
+	 * @param $value
+	 * @param $input
+	 *
+	 * @return bool|null
+	 */
+	public function repack_checkout_consent_value( $value, $input ) {
+		if ( is_null( $value ) && 'shipping_repack' === $input ) {
+			$value = $this->stage_checkout_checkbox_active_state();
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Evaluate the checkbox value
+	 * That differs from availability of a coupon
+	 *
+	 * @return bool
+	 */
+	public function stage_checkout_checkbox_active_state() {
+		global $woocommerce;
+
+		if ( $this->repack_coupon_exists() && $woocommerce->cart->has_discount( $this->coupon_name ) ) {
+			// Coupon is applied, or checkbox was checked
+			$state = true;
+		} elseif ( $woocommerce->customer->get_id() > 0 ) {
+			// Get the users shipping setting
+			$state = $this->get_user_repack_setting( $woocommerce->customer->get_id() );
+		} else {
+			// Lastly get site default
+			$state = apply_filters( 'repack_checkout_consent_default_state', true );
+		}
+
+		return $state;
+	}
+
+	/**
 	 * Add RePack field to shipping settings (e.g. My Account)
 	 *
 	 * @param $fields
@@ -217,7 +257,7 @@ class Repack_Public {
 	 * @since    1.0.0
 	 */
 	public function add_shipping_repack_field( $fields ) {
-		// Add extra section in checkout!
+		// Add shipping field outside checkout!
 		if ( ! is_checkout() ) {
 			$fields['shipping_repack'] = $this->get_repack_form_field_args();
 		}
@@ -326,7 +366,6 @@ class Repack_Public {
 		return wc_get_coupon_id_by_code( $this->coupon_name ) > 0;
 	}
 
-
 	/**
 	 * Global RePack counter update
 	 *
@@ -347,19 +386,34 @@ class Repack_Public {
 	 *
 	 * @return bool|mixed|void
 	 */
-	public function get_global_reoack_counter() {
+	public function get_global_repack_counter() {
 		return get_option( 'repack_counter' );
 	}
 
 	/**
-	 * Get total amount of repacked packages
+	 * Get user repack setting
 	 *
 	 * @return bool|mixed|void
 	 */
-	public function get_user_reoack_counter( $user_id ) {
+	public function get_user_repack_setting( $user_id ) {
+		return wc_string_to_bool(
+			get_user_meta(
+				$user_id,
+				$this->meta_name,
+				true
+			)
+		);
+	}
+
+	/**
+	 * User: Get total amount of repacked packages
+	 *
+	 * @return bool|mixed|void
+	 */
+	public function get_user_repack_counter( $user_id ) {
 		return get_user_meta(
 			$user_id,
-			$this->meta_name,
+			$this->meta_name . '_counter',
 			true
 		);
 	}
@@ -391,15 +445,11 @@ class Repack_Public {
 			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );
 
 			// Save customer decision for next order & count saved packages of user
-			update_user_meta( $order->get_customer_id(), $this->meta_name, $_POST['shipping_repack'] );
+			update_user_meta( $order->get_customer_id(), $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
 			update_user_meta(
 				$order->get_customer_id(),
-				$this->meta_name,
-				(int) get_user_meta(
-					$order->get_customer_id(),
-					$this->meta_name,
-					true
-				) + absint( $_POST['repack_counter'] )
+				$this->meta_name . '_counter',
+				(int) $this->get_user_repack_counter( $order->get_customer_id() ) + absint( $_POST['repack_counter'] )
 			);
 		}
 	}
@@ -426,10 +476,10 @@ class Repack_Public {
 				);
 
 				if ( $attributes['user_id'] ) {
-					return $attributes['prepend'] . $this->get_user_reoack_counter( (int) $attributes['user_id'] ) . $attributes['append'];
+					return $attributes['prepend'] . $this->get_user_repack_counter( (int) $attributes['user_id'] ) . $attributes['append'];
 				}
 
-				return $attributes['prepend'] . $this->get_global_reoack_counter() . $attributes['append'];
+				return $attributes['prepend'] . $this->get_global_repack_counter() . $attributes['append'];
 			}
 		);
 	}
