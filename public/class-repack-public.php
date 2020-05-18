@@ -215,8 +215,8 @@ class Repack_Public {
 	 * @param $input
 	 *
 	 * @return bool|null
-     *
-     * @since    1.0.4
+	 *
+	 * @since    1.0.4
 	 */
 	public function repack_checkout_consent_value( $value, $input ) {
 		if ( is_null( $value ) && 'shipping_repack' === $input ) {
@@ -231,7 +231,7 @@ class Repack_Public {
 	 * That differs from availability of a coupon
 	 *
 	 * @return bool
-     *
+	 *
 	 * @since    1.0.4
 	 */
 	public function stage_checkout_checkbox_active_state() {

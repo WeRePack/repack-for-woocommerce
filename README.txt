@@ -18,10 +18,12 @@ To do this, the plugin adds a field in the WooCommerce payment process where cus
 
 **Current features**
 
-*   Checkbox in payment process with subtle animation
+*   Checkbox in payment process with subtle animation, the position can be changed
 *   Reward with a voucher: Shop owners can create a voucher to encourage customers and share the savings. To do this, simply create an ordinary WooCommerce voucher called 'WeRePack'.
 *   Registered users can set their default value in the WooCommerce Dashboard.
-*   The shortcode `[repack]` shows the total number of shipping packages saved.
+*   The shortcode `[repack]` shows the total number of shipping packages saved, globally or by user.
+*   Clean code, no ads & no annoying notifications
+*   Highly customizable via Hooks & Filters
 
 **Coming soon**
 
@@ -75,8 +77,11 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 == Changelog ==
 
+= 1.0.6 =
+* Adds filter `repack_deactivate_remove_all_meta` which when true removes all plugin related data from the DB on plugin deactivation.
+
 = 1.0.5 =
-* WordPress.org Repo: Fix version
+* WordPress.org Repo: Fix version.
 
 = 1.0.4 =
 * Adds filter `repack_checkout_consent_position`: Allows changing the consent position.
@@ -90,12 +95,12 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 * Fixing version numbers.
 
 = 1.0.1 =
-* Fix overseen PHP error calling $order->id directly
-* Adds all available filters to Readme
+* Fix overseen PHP error calling $order->id directly.
+* Adds all available filters to Readme.
 
 = 1.0.0 =
 * Hello World!
-* Contains all features as explained in Readme
+* Contains all features as explained in Readme.
 
 == About WeRePack.org Initiative ==
 
