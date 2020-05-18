@@ -34,15 +34,16 @@ To do this, the plugin adds a field in the WooCommerce payment process where cus
 
 You can customize the plugin behavior and text by using the following filters in your themes `functions.php` or `/mu-plugins/wc-repack.php` file:
 
-*   `repack_checkout_consent_position`: Position of the consent, default is `woocommerce_after_order_notes`
-*   `repack_coupon_name`: Name of the coupon code to apply. Default is `WeRePack`
-*   `repack_consent_field_label`: Label of the consent checkbox
-*   `repack_consent_field_description`: Description of the consent checkbox
-*   `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox
-*   `repack_coupon_removed_applied_text`: Notice text after coupon was applied
-*   `repack_coupon_removed_notice_text`: Notice text after coupon was removed
-*   `repack_email_label`: Label in WooCommerce mails if consent was given
-*   `repack_email_text`: Text in WooCommerce mails if consent was given
+*   `repack_checkout_consent_position`: Position of the consent, default is `woocommerce_after_order_notes`.
+*   `repack_coupon_name`: Name of the coupon code to apply. Default is `WeRePack`.
+*   `repack_consent_field_label`: Label of the consent checkbox.
+*   `repack_consent_field_description`: Description of the consent checkbox.
+*   `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox.
+*   `repack_coupon_removed_applied_text`: Notice text after coupon was applied.
+*   `repack_coupon_removed_notice_text`: Notice text after coupon was removed.
+*   `repack_email_label`: Label in WooCommerce mails if consent was given.
+*   `repack_email_text`: Text in WooCommerce mails if consent was given.
+*   'repack_deactivate_remove_all_meta': Set to `true` to delete all plugin related metadata on deactivation.
 
 **Missing something?**
 Write us what else is needed to make your shop more sustainable. Whatever it is, we will do our best to get as many shops as possible to join the initiative.
