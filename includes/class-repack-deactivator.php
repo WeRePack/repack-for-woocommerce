@@ -24,14 +24,38 @@ class Repack_Deactivator {
 
 
 	/**
-	 * Short Description. (use period)
+	 * Remove metadata and global option
 	 *
-	 * Long Description.
+	 * By default no metadata is removed to keep functionality and counters on reactivation.
+	 * To delete all data related to the plugin, use the filter 'repack_deactivate_remove_all_meta'
+	 * in functions.php: add_filter( 'repack_deactivate_remove_all_meta', '__return_true' );
 	 *
-	 * @since    1.0.0
+	 * @since    1.0.6
 	 */
 	public static function deactivate() {
-		// Delete option
-		delete_option( 'repack_counter' );
+		if ( apply_filters( 'repack_deactivate_remove_all_meta', false ) ) {
+			// Delete global counter
+			delete_option( 'repack_counter' );
+
+			// Delete all order meta
+			delete_metadata(
+				'post', // since we are deleting data for CPT
+				0,
+				'_shipping_repack',
+				'',
+				true
+			);
+
+			// Delete user meta
+			foreach ( array( 'shipping_repack', 'shipping_repack_counter' ) as $meta ) {
+				delete_metadata(
+					'user',
+					0,
+					$meta,
+					'',
+					true
+				);
+			}
+		}
 	}
 }
