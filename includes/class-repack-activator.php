@@ -33,5 +33,7 @@ class Repack_Activator {
 	public static function activate() {
 		// Add RePack counter option
 		add_option( 'repack_counter' );
+		// Add the start time
+        update_option( 'repack_start', current_time('timestamp') );
 	}
 }

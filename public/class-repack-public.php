@@ -155,7 +155,7 @@ class Repack_Public {
 		global $woocommerce;
 		$cart = $woocommerce->cart;
 
-		// todo: No shipping, no packaging?
+		// No shipping, no packaging!
 		if ( $cart->needs_shipping() ) {
 			?>
 			<div id="order_repack-wrap">
