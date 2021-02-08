@@ -34,10 +34,10 @@ class Repack_Deactivator {
 	 */
 	public static function deactivate() {
 		if ( apply_filters( 'repack_deactivate_remove_all_meta', false ) ) {
-            // Delete Plugin Options
-            foreach ( array( 'repack_counter', 'repack_start', 'repack_telemetry_sent', 'repack_telemetry_optin', 'repack_telemetry_no_consent' ) as $option ) {
-                delete_option($option);
-            }
+			// Delete Plugin Options
+			foreach ( array( 'repack_counter', 'repack_start', 'repack_telemetry_sent', 'repack_telemetry_optin', 'repack_telemetry_no_consent' ) as $option ) {
+				delete_option( $option );
+			}
 
 			// Delete all order meta
 			delete_metadata(

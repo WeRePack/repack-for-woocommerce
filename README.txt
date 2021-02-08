@@ -3,7 +3,7 @@ Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
-Tested up to: 5.4.1
+Tested up to: 5.6.1
 Stable tag: 1.0
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -77,6 +77,10 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 2. Shipping notice in WooCommerce Order Overview
 
 == Changelog ==
+
+= 1.1.0 =
+* Adds Telemetry Module: We want to win you as a supporter and measure our joint success. To do this, you can share certain data with us in order to be listed in the supporter directory on WeRePack.org.
+* Various improvements
 
 = 1.0.6 =
 * Adds filter `repack_deactivate_remove_all_meta` which when true removes all plugin related data from the DB on plugin deactivation.

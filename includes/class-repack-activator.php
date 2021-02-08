@@ -34,6 +34,6 @@ class Repack_Activator {
 		// Add RePack counter option
 		add_option( 'repack_counter' );
 		// Add the start time
-        update_option( 'repack_start', current_time('timestamp') );
+		update_option( 'repack_start', current_datetime()->getTimestamp() );
 	}
 }

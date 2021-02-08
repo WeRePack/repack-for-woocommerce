@@ -65,15 +65,15 @@ class Repack_Admin {
 		$this->version     = $version;
 		$this->meta_name   = $meta_name;
 
-        /**
-         * The class responsible for running telemetry.
-         */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-repack-telemetry.php';
+		/**
+		 * The class responsible for running telemetry.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-repack-telemetry.php';
 
-        /**
-         * Init Telemetry
-         */
-        new Repack_Telemetry();
+		/**
+		 * Init Telemetry
+		 */
+		new Repack_Telemetry();
 	}
 
 
