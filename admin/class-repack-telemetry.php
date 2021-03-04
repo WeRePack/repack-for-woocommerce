@@ -133,11 +133,11 @@ class Repack_Telemetry {
 				<tbody>
 				<tr>
 					<td style="min-width: 200px;"><?php esc_html_e( 'Website URL', 'repack' ); ?></td>
-					<td><code><?php echo esc_html( $data['wpURL'] ); ?></code></td>
+					<td><code><?php echo esc_html( $data['siteURL'] ); ?></code></td>
 				</tr>
 				<tr>
 					<td><?php esc_html_e( 'Website Language', 'repack' ); ?></td>
-					<td><code><?php echo esc_html( $data['wpLang'] ); ?></code></td>
+					<td><code><?php echo esc_html( $data['siteLang'] ); ?></code></td>
 				</tr><tr>
 					<td><?php esc_html_e( 'RePack Start', 'repack' ); ?></td>
 					<td><code><?php echo esc_html( wp_date( 'd.m.Y', $data['repackStart'] ) ); ?></code></td>
@@ -196,11 +196,12 @@ class Repack_Telemetry {
 	private function get_data() {
 		// Build data and return the array.
 		return array(
-			'wpURL'         => home_url( '/' ),
-			'wpLang'        => get_locale(),
-			'repackStart'   => get_option( 'repack_start' ),
-			'repackCounter' => get_option( 'repack_counter' ),
-			'repackRatio'   => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
+			'siteURL'           => home_url( '/' ),
+			'siteLang'          => get_locale(),
+			'repackStart'       => get_option( 'repack_start' ),
+			'repackCounter'     => get_option( 'repack_counter' ),
+			'repackRatio'       => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
+            'repackLastSent'    => get_option( 'repack_telemetry_sent' )
 		);
 	}
 
