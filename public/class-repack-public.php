@@ -136,6 +136,11 @@ class Repack_Public {
 					'repack',
 					'repack-checkbox',
 				),
+                'input_class'   =>  array(
+                    'woocommerce-form__input',
+                    'woocommerce-form__input-checkbox',
+                    'input-checkbox'
+                )
 			),
 			$args
 		);
@@ -159,24 +164,22 @@ class Repack_Public {
 		if ( $cart->needs_shipping() ) {
 			?>
 			<div id="order_repack-wrap">
-				<p>
-					<strong>
-						<?php
-						printf(
-							esc_html(
-							/* translators: %s: Amount of packaging to send */
-								_n(
-									'%s packaging can be saved',
-									'%s packaging can be saved',
-									count( $cart->get_shipping_packages() ),
-									'repack'
-								)
-							),
-							esc_html( number_format_i18n( count( $cart->get_shipping_packages() ) ) )
-						);
-						?>
-					</strong>
-				</p>
+				<h3>
+                    <?php
+                    printf(
+                        esc_html(
+                        /* translators: %s: Amount of packaging to send */
+                            _n(
+                                'Save a packaging with us',
+                                'Save %s packaging with us',
+                                count( $cart->get_shipping_packages() ),
+                                'repack'
+                            )
+                        ),
+                        esc_html( number_format_i18n( count( $cart->get_shipping_packages() ) ) )
+                    );
+                    ?>
+				</h3>
 				<div class="woocommerce-additional-fields__field-wrapper">
 					<?php
 					echo esc_html(
