@@ -68,7 +68,7 @@ class Repack_Admin {
 		/**
 		 * The class responsible for running telemetry.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-repack-telemetry.php';
+		require_once REPACK_PLUGIN_DIR . 'admin/class-repack-telemetry.php';
 
 		/**
 		 * Init Telemetry

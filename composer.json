@@ -24,5 +24,7 @@
         "fix": [
             "phpcbf -q --ignore=index.php,vendor,resources,storage,dist --extensions=php --standard=WordPress-Extra . && composer lint"
         ]
+    },
+    "require": {
     }
 }

@@ -19,16 +19,39 @@ To do this, the plugin adds a field in the WooCommerce payment process where cus
 **Current features**
 
 *   Checkbox in payment process with subtle animation, the position can be changed
-*   Reward with a voucher: Shop owners can create a voucher to encourage customers and share the savings. To do this, simply create an ordinary WooCommerce voucher called 'WeRePack'.
+*   Reward with a coupon: Shop owners can create a coupon code to encourage customers and share the savings. To do this, simply create an ordinary WooCommerce voucher called 'WeRePack'.
 *   Registered users can set their default value in the WooCommerce Dashboard.
-*   The shortcode `[repack]` shows the total number of shipping packages saved, globally or by user.
+*   Shortcodes `[repack]` & `[repack_summary]` to show your support and savings.
 *   Clean code, no ads & no annoying notifications
 *   Highly customizable via Hooks & Filters
+*   Optionally share basic stats, help us improve and get listed on WeRePack.org as a supporter site.
 
 **Coming soon**
 
-*   Gutenberg Block, which visually represents the savings to date.
-*   Be listed as a supporter on the initiative's website.
+*  Gutenberg Block additionally to Shortcode, which visually represents the savings to date.
+
+**Templates**
+
+You can use the following shortcodes and functions to show your savings:
+
+*** Shortcode `[repack]`***
+
+Display the savings of your site or individual users such as: Amount of reused packages, water saved, CO2 saved and mature trees saved. The shortcode attributes:
+
+* `type=""`: What amount to display: "packaging" (default), "co2", "water" or "trees"
+* `value=""`: Set to `true` if you only want to display the number/quantity without unit (e.g. "litres of water")
+* `packages=""`: Lets you overwrite the number of packages the output is calculated with. Leave empty to get your sites counter.
+* `user_id=""`: User ID of whom you want to display the saving: Leave blank to use the sites total saving instead.
+* `prepend=""`: HTML to prepend to output. Default: Empty string
+* `append=""`:  HTML to append to output. Default: Empty string
+
+*** Shortcode `[repack_summary]` or function `Repack_Public::get_repack_summary()`***
+
+Displays a summary of you sites packaging savings. You can copy and overwrite the template file from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`.
+
+* `packages=""`: Lets you overwrite the number of packages the output is calculated with. Leave empty to get your sites counter.
+* `prepend=""`: HTML to prepend to output. Default: Empty string
+* `append=""`:  HTML to append to output. Default: Empty string
 
 **Available Filters**
 
@@ -43,9 +66,12 @@ You can customize the plugin behavior and text by using the following filters in
 *   `repack_coupon_removed_notice_text`: Notice text after coupon was removed.
 *   `repack_email_label`: Label in WooCommerce mails if consent was given.
 *   `repack_email_text`: Text in WooCommerce mails if consent was given.
-*   'repack_deactivate_remove_all_meta': Set to `true` to delete all plugin related metadata on deactivation.
+*   `repack_deactivate_remove_all_meta: Set to `true` to delete all plugin related metadata on deactivation.
+*   `repack_template_summary_data`: `$data` object passed to summary.php template.
+*   `repack_template_summary_saving`: `$saving` object passed to summary.php template.
 
 **Missing something?**
+
 Write us what else is needed to make your shop more sustainable. Whatever it is, we will do our best to get as many shops as possible to join the initiative.
 
 == Installation ==
@@ -73,13 +99,14 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 == Screenshots ==
 
-1. Checkbox animation, adapts your Theme Design
+1. Checkbox animation, adapts to your Theme Design
 2. Shipping notice in WooCommerce Order Overview
 
 == Changelog ==
 
 = 1.1.0 =
-* Adds Telemetry Module: We want to win you as a supporter and measure our joint success. To do this, you can share certain data with us in order to be listed in the supporter directory on WeRePack.org.
+* Adds Telemetry Module: We want to win you as a supporter and measure our joint success. To do this, you can share some stats with us in order to get listed in the supporter directory on WeRePack.org.
+* Adds summary shortcode and template. You can copy and overwrite it in your theme from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`
 * Various improvements
 
 = 1.0.6 =

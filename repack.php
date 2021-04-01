@@ -33,13 +33,14 @@ if ( ! defined( 'WPINC' ) ) {
  * Currently plugin version.
  */
 define( 'REPACK_VERSION', '1.1.0' );
+define( 'REPACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-repack-activator.php
  */
 function activate_repack() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-repack-activator.php';
+	require_once REPACK_PLUGIN_DIR . 'includes/class-repack-activator.php';
 	Repack_Activator::activate();
 }
 
@@ -48,7 +49,7 @@ function activate_repack() {
  * This action is documented in includes/class-repack-deactivator.php
  */
 function deactivate_repack() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-repack-deactivator.php';
+	require_once REPACK_PLUGIN_DIR . 'includes/class-repack-deactivator.php';
 	Repack_Deactivator::deactivate();
 }
 
@@ -59,7 +60,7 @@ register_deactivation_hook( __FILE__, 'deactivate_repack' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-repack.php';
+require REPACK_PLUGIN_DIR . 'includes/class-repack.php';
 
 /**
  * Begins execution of the plugin.
