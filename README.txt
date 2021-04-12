@@ -76,7 +76,7 @@ Write us what else is needed to make your shop more sustainable. Whatever it is,
 
 == Installation ==
 
-Install the plugin either via WordPress or as a composer package via `composer require ouun/wc-repack`
+Install the plugin either via WordPress or as a composer package via `composer require ouun/repack-for-woocommerce`
 
 == Frequently Asked Questions ==
 
