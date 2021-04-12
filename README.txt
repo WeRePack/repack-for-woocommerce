@@ -109,7 +109,7 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 == Changelog ==
 
 = 1.1.2 =
-* Switch text-domain to support WP.org GlotPress Translations [WeRePack.org](https://werepack.org/ "The WeRePack Initiative")
+* Switch text-domain to support WP.org GlotPress Translations at [translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce](translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "Translate RePack Plugin")
 
 = 1.1.1 =
 * Update Translations: English, German (formal) & German (informal)
