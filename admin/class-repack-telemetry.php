@@ -140,7 +140,7 @@ class Repack_Telemetry {
 					<td><code><?php echo esc_html( $data['siteLang'] ); ?></code></td>
 				</tr><tr>
 					<td><?php esc_html_e( 'RePack Start', 'repack' ); ?></td>
-					<td><code><?php echo esc_html( wp_date( 'd.m.Y', $data['repackStart'] ) ); ?></code></td>
+					<td><code><?php echo esc_html( wp_date( get_option('date_format'), $data['repackStart'] ) ); ?></code></td>
 				</tr>
 				<tr>
 					<td><?php esc_html_e( 'RePack Consents', 'repack' ); ?></td>
