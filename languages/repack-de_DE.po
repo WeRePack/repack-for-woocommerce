@@ -2,11 +2,11 @@
 # This file is distributed under the same license as the RePack - Reuse Packaging for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.0\n"
+"Project-Id-Version: 1.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/repack-for-"
 "woocommerce\n"
-"POT-Creation-Date: 2021-04-12T13:35:33+02:00\n"
-"PO-Revision-Date: 2021-04-12 13:58+0200\n"
+"POT-Creation-Date: 2021-04-12T13:59:27+02:00\n"
+"PO-Revision-Date: 2021-04-12 14:00+0200\n"
 "Last-Translator: Philipp Wellmer <philipp@ouun.io>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -22,8 +22,8 @@ msgid "RePack - Reuse Packaging for WooCommerce"
 msgstr "RePack - Verpackung Wiederverwenden für WooCommerce"
 
 #. Plugin URI of the plugin
-msgid "https://WeRePack.org/download"
-msgstr "https://WeRePack.org/download"
+msgid "https://WeRePack.org/"
+msgstr "https://WeRePack.org/"
 
 #. Description of the plugin
 msgid ""
@@ -253,6 +253,9 @@ msgstr ""
 "entscheiden eine gebrauchte, aber einwandfreie, Verpackung zu erhalten. "
 "Stimme einfach zu und Deine Bestellung wird mit der %s wiederverwendeten "
 "Verpackung versendet."
+
+#~ msgid "https://WeRePack.org/download"
+#~ msgstr "https://WeRePack.org/download"
 
 #~ msgid "Philipp Wellmer/WeRePack.org"
 #~ msgstr "Philipp Wellmer/WeRePack.org"
