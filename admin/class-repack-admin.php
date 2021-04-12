@@ -98,7 +98,7 @@ class Repack_Admin {
 	 */
 	public function get_order_repack_decision( $order ) {
 		if ( $this->is_repack_order( $order ) ) {
-			return __( 'Shipping with reused packaging preferred!', 'repack' );
+			return __( 'Shipping with reused packaging preferred!', 'repack-for-woocommerce' );
 		} else {
 			return $this->is_repack_order( $order );
 		}
@@ -113,7 +113,7 @@ class Repack_Admin {
 	public function add_order_details( $order ) {
 		if ( $this->is_repack_order( $order ) ) { ?>
 			<div class="clear"></div>
-			<h3><?php esc_html_e( 'Reuse Packaging', 'repack' ); ?></h3>
+			<h3><?php esc_html_e( 'Reuse Packaging', 'repack-for-woocommerce' ); ?></h3>
 			<div class="repack">
 				<p class="form-field form-field-wide">
 					<strong>
@@ -136,13 +136,13 @@ class Repack_Admin {
 	public function add_shipping_field( $fields ) {
 
 		$fields['repack'] = array(
-			'label'   => __( 'Reuse Packaging', 'repack' ),
+			'label'   => __( 'Reuse Packaging', 'repack-for-woocommerce' ),
 			'type'    => 'select',
 			'class'   => 'js_field-repack select short',
 			'options' => array(
-				''    => __( 'Please choose', 'repack' ),
-				'yes' => __( 'Yes', 'repack' ),
-				'no'  => __( 'No', 'repack' ),
+				''    => __( 'Please choose', 'repack-for-woocommerce' ),
+				'yes' => __( 'Yes', 'repack-for-woocommerce' ),
+				'no'  => __( 'No', 'repack-for-woocommerce' ),
 			),
 			'show'    => false,
 		);
@@ -163,8 +163,8 @@ class Repack_Admin {
 
 		if ( $this->is_repack_order( $order ) ) {
 			$fields[ $this->meta_name ] = array(
-				'label' => apply_filters( 'repack_email_label', __( 'Reused Packaging', 'repack' ) ),
-				'value' => apply_filters( 'repack_email_text', __( 'Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available.', 'repack' ) ),
+				'label' => apply_filters( 'repack_email_label', __( 'Reused Packaging', 'repack-for-woocommerce' ) ),
+				'value' => apply_filters( 'repack_email_text', __( 'Thanks for helping us save resources! We will prefer an used shipping packaging to a new one, if available.', 'repack-for-woocommerce' ) ),
 			);
 		}
 

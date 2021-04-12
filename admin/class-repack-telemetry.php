@@ -120,34 +120,34 @@ class Repack_Telemetry {
 		$data = $this->get_data();
 		?>
 		<div class="notice notice-info repack-telemetry">
-			<h3><strong><?php esc_html_e( 'Help us reducing packaging waste. Join the WeRePack initiative.', 'repack' ); ?></strong></h3>
+			<h3><strong><?php esc_html_e( 'Help us reducing packaging waste. Join the WeRePack initiative.', 'repack-for-woocommerce' ); ?></strong></h3>
 			<p style="max-width: 76em;">
-				<?php _e( 'We want to win you as a supporter and measure our joint success. To do this, you can share certain data with us in order to be listed in the supporter directory on WeRePack.org. This way, we can measure our positive impact on e-commerce and give you a platform that recognises your commitment to the environment. <br><strong>No sensitive user data is transferred.</strong>', 'repack' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<?php _e( 'We want to win you as a supporter and measure our joint success. To do this, you can share certain data with us in order to be listed in the supporter directory on WeRePack.org. This way, we can measure our positive impact on e-commerce and give you a platform that recognises your commitment to the environment. <br><strong>No sensitive user data is transferred.</strong>', 'repack-for-woocommerce' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</p>
 			<table class="data-to-send hidden">
 				<thead>
 				<tr>
-					<th colspan="2"><?php esc_html_e( 'Data that will be sent', 'repack' ); ?></th>
+					<th colspan="2"><?php esc_html_e( 'Data that will be sent', 'repack-for-woocommerce' ); ?></th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr>
-					<td style="min-width: 200px;"><?php esc_html_e( 'Website URL', 'repack' ); ?></td>
+					<td style="min-width: 200px;"><?php esc_html_e( 'Website URL', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( $data['siteURL'] ); ?></code></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'Website Language', 'repack' ); ?></td>
+					<td><?php esc_html_e( 'Website Language', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( $data['siteLang'] ); ?></code></td>
 				</tr><tr>
-					<td><?php esc_html_e( 'RePack Start', 'repack' ); ?></td>
+					<td><?php esc_html_e( 'RePack Start', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( wp_date( get_option('date_format'), $data['repackStart'] ) ); ?></code></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'RePack Consents', 'repack' ); ?></td>
-					<td><code><?php echo esc_html( ! empty( $data['repackCounter'] ) ? $data['repackCounter'] : __( 'None yet', 'repack' ) ); ?></code></td>
+					<td><?php esc_html_e( 'RePack Consents', 'repack-for-woocommerce' ); ?></td>
+					<td><code><?php echo esc_html( ! empty( $data['repackCounter'] ) ? $data['repackCounter'] : __( 'None yet', 'repack-for-woocommerce' ) ); ?></code></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'RePack Consent Ratio', 'repack' ); ?></td>
+					<td><?php esc_html_e( 'RePack Consent Ratio', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( $data['repackRatio'] . '%' ); ?></code></td>
 				</tr>
 				</tbody>
@@ -157,7 +157,7 @@ class Repack_Telemetry {
 						<?php
 						printf(
 						/* translators: %1$s: URL to the server plugin code. %2$s: URL to the stats page. */
-							__( 'We believe in complete transparency. You can see the code used on our server <a href="%1$s" rel="nofollow">here</a>, and the results of the statistics we\'re gathering on <a href="%2$s" rel="nofollow">this page</a>.', 'repack' ), // phpcs:ignore WordPress.Security.EscapeOutput
+							__( 'We believe in complete transparency. You can see the code used on our server <a href="%1$s" rel="nofollow">here</a>, and the results of the statistics we\'re gathering on <a href="%2$s" rel="nofollow">this page</a>.', 'repack-for-woocommerce' ), // phpcs:ignore WordPress.Security.EscapeOutput
 							'https://github.com/ouun/repack-for-woocommerce',
 							'https://werepack.org/repack-telemetry-statistics/'
 						);
@@ -168,10 +168,10 @@ class Repack_Telemetry {
 			</table>
 			<p class="actions">
 
-				<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'repack-consent-notice', 'telemetry' ) ) ); ?>" class="button button-primary consent"><?php esc_html_e( 'I agree', 'repack' ); ?></a>
-				<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'repack-hide-notice', 'telemetry' ) ) ); ?>" class="button button-secondary dismiss"><?php esc_html_e( 'No thanks', 'repack' ); ?></a>
-				<a class="button button-link details details-show"><?php esc_html_e( 'Show me the data', 'repack' ); ?></a>
-				<a class="button button-link details details-hide hidden"><?php esc_html_e( 'Collapse data', 'repack' ); ?></a>
+				<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'repack-consent-notice', 'telemetry' ) ) ); ?>" class="button button-primary consent"><?php esc_html_e( 'I agree', 'repack-for-woocommerce' ); ?></a>
+				<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'repack-hide-notice', 'telemetry' ) ) ); ?>" class="button button-secondary dismiss"><?php esc_html_e( 'No thanks', 'repack-for-woocommerce' ); ?></a>
+				<a class="button button-link details details-show"><?php esc_html_e( 'Show me the data', 'repack-for-woocommerce' ); ?></a>
+				<a class="button button-link details details-hide hidden"><?php esc_html_e( 'Collapse data', 'repack-for-woocommerce' ); ?></a>
 			</p>
 			<script>
 				jQuery( '.repack-telemetry a.details' ).on( 'click', function() {

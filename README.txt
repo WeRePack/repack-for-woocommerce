@@ -1,7 +1,7 @@
 === RePack - Reuse Packaging for WooCommerce ===
 Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
-Tags: woocommerce, shipping, consent, recycle, reuse, ecommerce, sustainable
+Tags: woocommerce, shipping, coupon, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
 Tested up to: 5.7
 Stable tag: 1.0
@@ -92,6 +92,12 @@ The plugin gives you maximum flexibility and accepts all WooCommerce coupons tha
 
 Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/repack-for-woocommerce "RePack on GitHub"), translate the plugin. We really appreciate every support.
 
+= My language is missing. How to contribute it? =
+
+We are so happy and thankful that you support the initiative with your contribution! Since version 1.1.2 we use the official WordPress Translation System on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "translate.wordpress.org").
+If it is the first time that you contribute translations, please have a short look at [the First Steps](https://make.wordpress.org/polyglots/handbook/translating/first-steps/#contributing-your-first-translations "First Steps").
+Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "translate.wordpress.org").
+
 == Screenshots ==
 
 1. Checkbox animation, adapts to your Theme Design
@@ -101,6 +107,9 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 5. ... get listed as Supporter on WeRePack.org
 
 == Changelog ==
+
+= 1.1.2 =
+* Switch text-domain to support WP.org GlotPress Translations [WeRePack.org](https://werepack.org/ "The WeRePack Initiative")
 
 = 1.1.1 =
 * Update Translations: English, German (formal) & German (informal)

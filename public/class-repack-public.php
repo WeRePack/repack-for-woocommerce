@@ -120,12 +120,12 @@ class Repack_Public {
 	private function get_repack_form_field_args( $args = array() ) {
 		$merged_args = array_merge(
 			array(
-				'label'       => apply_filters( 'repack_consent_field_label', __( 'Yes, please reuse packaging if available.', 'repack' ) ),
+				'label'       => apply_filters( 'repack_consent_field_label', __( 'Yes, please reuse packaging if available.', 'repack-for-woocommerce' ) ),
 				'description' => apply_filters(
 					'repack_consent_field_description',
 					sprintf(
 					/* translators: %s: WeRePack website link */
-						__( 'With your consent we prefer already used shipping packaging. Help us protect the environment and learn more about the initiative on %s.', 'repack' ),
+						__( 'With your consent we prefer already used shipping packaging. Help us protect the environment and learn more about the initiative on %s.', 'repack-for-woocommerce' ),
 						'<a href="https://werepack.org/" target="_blank">WeRePack.org</a>'
 					)
 				),
@@ -170,7 +170,7 @@ class Repack_Public {
 					<?php
 					if ( 1 === $packages ) {
 						printf(
-							esc_html__( 'Save a packaging with us', 'repack' ),
+							esc_html__( 'Save a packaging with us', 'repack-for-woocommerce' ),
 							esc_html( number_format_i18n( $packages ) )
 						);
 					} else {
@@ -181,7 +181,7 @@ class Repack_Public {
 									'Save %d packaging with us',
 									'Save %d packaging with us',
 									$packages,
-									'repack'
+									'repack-for-woocommerce'
 								)
 							),
 							esc_html( number_format_i18n( $packages ) )
@@ -305,8 +305,8 @@ class Repack_Public {
 						'repack_coupon_removed_notice_text',
 						sprintf(
 						/* translators: %s: Thank You */
-							__( 'Your discount for reusing packaging has been applied. %s', 'repack' ),
-							'<strong>' . __( 'Thank you!', 'repack' ) . '</strong>'
+							__( 'Your discount for reusing packaging has been applied. %s', 'repack-for-woocommerce' ),
+							'<strong>' . __( 'Thank you!', 'repack-for-woocommerce' ) . '</strong>'
 						)
 					),
 					'success'
@@ -320,7 +320,7 @@ class Repack_Public {
 					apply_filters(
 						'repack_coupon_applied_notice_text',
 						sprintf(
-							__( 'Your discount for reusing packaging has been removed.', 'repack' )
+							__( 'Your discount for reusing packaging has been removed.', 'repack-for-woocommerce' )
 						)
 					),
 					'notice'
@@ -340,7 +340,7 @@ class Repack_Public {
 
 				if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
 					WC()->session->set( 'refresh_totals', true );
-					throw new Exception( __( 'We were unable to process your order, please try again.', 'repack' ) );
+					throw new Exception( __( 'We were unable to process your order, please try again.', 'repack-for-woocommerce' ) );
 				}
 
 				// Run coupon logic with checkbox value
@@ -410,7 +410,7 @@ class Repack_Public {
 
 		if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
 			WC()->session->set( 'refresh_totals', true );
-			throw new Exception( __( 'We were unable to process your order, please try again.', 'repack' ) );
+			throw new Exception( __( 'We were unable to process your order, please try again.', 'repack-for-woocommerce' ) );
 		}
 
 		if ( isset( $_POST['shipping_repack'] ) && isset( $_POST['repack_counter'] ) && ! empty( $_POST['shipping_repack'] ) && ! empty( $_POST['repack_counter'] ) ) {
@@ -418,7 +418,7 @@ class Repack_Public {
 			$order->update_meta_data( '_' . $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
 
 			// Add order note
-			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'repack' ), true, false );
+			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'repack-for-woocommerce' ), true, false );
 
 			// Update global RePack counter
 			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );
@@ -488,7 +488,7 @@ class Repack_Public {
 			$water = round( $packages * 123, 1 );
 			return $value ? $water : sprintf(
 			/* translators: %s lites of water */
-				__( '%s litres of water', 'repack' ),
+				__( '%s litres of water', 'repack-for-woocommerce' ),
 				self::get_counter_span( $water )
 			);
 		}
@@ -498,7 +498,7 @@ class Repack_Public {
 			$co2 = round( $packages * 156, 1 );
 			return $value ? $co2 : sprintf(
 			/* translators: %s grams of CO2 */
-				__( '%s grams of CO2', 'repack' ),
+				__( '%s grams of CO2', 'repack-for-woocommerce' ),
 				self::get_counter_span( $co2 )
 			);
 		}
@@ -508,14 +508,14 @@ class Repack_Public {
 			$trees = round( $packages * 0.0024, 1 );
 			return $value ? $trees : sprintf(
 			/* translators: %s mature trees */
-				__( '%s mature trees', 'repack' ),
+				__( '%s mature trees', 'repack-for-woocommerce' ),
 				self::get_counter_span( $trees, '', 1 )
 			);
 		}
 
 		return $value ? $packages : sprintf(
 		/* translators: %s packaging reused */
-			__( '%s packaging', 'repack' ),
+			__( '%s packaging', 'repack-for-woocommerce' ),
 			self::get_counter_span( $packages )
 		);
 	}

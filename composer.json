@@ -25,7 +25,7 @@
             "phpcbf -q --ignore=index.php,vendor,resources,storage,dist --extensions=php --standard=WordPress-Extra . && composer lint"
         ],
         "translate": [
-            "wp i18n make-pot . ./languages/repack.pot --domain=\"repack\" --exclude==\"vendor\""
+            "wp i18n make-pot . ./languages/repack-for-woocommerce.pot --domain=\"repack-for-woocommerce\" --exclude==\"vendor\""
         ]
     },
     "require": {
