@@ -102,6 +102,9 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 == Changelog ==
 
+= 1.1.1 =
+* Update Translations: English, German (formal) & German (informal)
+
 = 1.1.0 =
 * Various improvements
 * Adds summary shortcode and template. You can copy and overwrite it in your theme from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`

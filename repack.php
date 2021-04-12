@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       RePack - Reuse Packaging for WooCommerce
- * Plugin URI:        https://WeRePack.org/download
+ * Plugin URI:        https://WeRePack.org/
  * Description:       Get permission from your customers to reuse already used shipping packaging. As a shop owner it is an easy way to save resources, money and above all to protect the environment.
  * Version:           1.1.0
  * Author:            WeRePack.org
