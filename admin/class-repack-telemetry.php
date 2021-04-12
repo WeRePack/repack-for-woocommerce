@@ -196,12 +196,12 @@ class Repack_Telemetry {
 	private function get_data() {
 		// Build data and return the array.
 		return array(
-			'siteURL'           => home_url( '/' ),
-			'siteLang'          => get_locale(),
-			'repackStart'       => get_option( 'repack_start' ),
-			'repackCounter'     => get_option( 'repack_counter' ),
-			'repackRatio'       => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
-            'repackLastSent'    => get_option( 'repack_telemetry_sent' )
+			'siteURL'        => home_url( '/' ),
+			'siteLang'       => get_locale(),
+			'repackStart'    => get_option( 'repack_start' ),
+			'repackCounter'  => get_option( 'repack_counter' ),
+			'repackRatio'    => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
+			'repackLastSent' => get_option( 'repack_telemetry_sent' ),
 		);
 	}
 

@@ -85,3 +85,35 @@
 
 #order_repack-wrap {
   margin-top: 40px; }
+
+.repack-summary {
+  position: relative; }
+  .repack-summary .repack-summary-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 85%;
+    margin: 20px -5px; }
+    .repack-summary .repack-summary-items .repack-summary-item {
+      flex-grow: 1;
+      width: auto;
+      text-align: center;
+      padding: 5px; }
+      .repack-summary .repack-summary-items .repack-summary-item .repack-counter {
+        display: block;
+        position: relative;
+        font-size: 170%;
+        font-weight: bold;
+        line-height: 1.2;
+        padding: 0;
+        margin: 0; }
+    .repack-summary .repack-summary-items .repack-summary-logo {
+      padding: 5px;
+      text-align: center; }
+  @media (max-width: 480px) {
+    .repack-summary .repack-summary-items .repack-summary-logo {
+      width: 100%;
+      padding-bottom: 20px; }
+    .repack-summary .repack-summary-items .repack-summary-item {
+      width: 50%; } }

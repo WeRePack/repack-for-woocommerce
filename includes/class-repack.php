@@ -127,13 +127,13 @@ class Repack {
 		 */
 		require_once REPACK_PLUGIN_DIR . 'admin/class-repack-admin.php';
 
-        /**
-         * The class responsible for defining all actions that occur in the public-facing
-         * side of the site.
-         */
-        require_once REPACK_PLUGIN_DIR . 'public/class-repack-template-loader.php';
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * side of the site.
+		 */
+		require_once REPACK_PLUGIN_DIR . 'public/class-repack-template-loader.php';
 
-        /**
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */

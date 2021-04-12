@@ -136,11 +136,11 @@ class Repack_Public {
 					'repack',
 					'repack-checkbox',
 				),
-                'input_class'   =>  array(
-                    'woocommerce-form__input',
-                    'woocommerce-form__input-checkbox',
-                    'input-checkbox'
-                )
+				'input_class' => array(
+					'woocommerce-form__input',
+					'woocommerce-form__input-checkbox',
+					'input-checkbox',
+				),
 			),
 			$args
 		);
@@ -162,23 +162,32 @@ class Repack_Public {
 
 		// No shipping, no packaging!
 		if ( $cart->needs_shipping() ) {
+			// Count the amount of packages
+			$packages = count( $cart->get_shipping_packages() );
 			?>
 			<div id="order_repack-wrap">
 				<h3>
-                    <?php
-                    printf(
-                        esc_html(
-                        /* translators: %s: Amount of packaging to send */
-                            _n(
-                                'Save a packaging with us',
-                                'Save %s packaging with us',
-                                count( $cart->get_shipping_packages() ),
-                                'repack'
-                            )
-                        ),
-                        esc_html( number_format_i18n( count( $cart->get_shipping_packages() ) ) )
-                    );
-                    ?>
+					<?php
+					if ( 1 === $packages ) {
+						printf(
+							esc_html__( 'Save a packaging with us', 'repack' ),
+							esc_html( number_format_i18n( $packages ) )
+						);
+					} else {
+						printf(
+							esc_html(
+							/* translators: %d: Amount of packaging to send */
+								_n(
+									'Save %d packaging with us',
+									'Save %d packaging with us',
+									$packages,
+									'repack'
+								)
+							),
+							esc_html( number_format_i18n( $packages ) )
+						);
+					}
+					?>
 				</h3>
 				<div class="woocommerce-additional-fields__field-wrapper">
 					<?php
@@ -201,7 +210,7 @@ class Repack_Public {
 								'type'              => 'number',
 								'custom_attributes' => array( 'style' => 'display: none;' ),
 							),
-							count( $cart->get_shipping_packages() )
+							$packages
 						)
 					);
 					?>
@@ -388,41 +397,41 @@ class Repack_Public {
 		);
 	}
 
-    /**
-     * Save data to order and clients user meta
-     *
-     * @param WC_Order $order
-     * @param $data
-     *
-     * @throws Exception
-     */
-    public function repack_save_order( $order, $data ) {
+	/**
+	 * Save data to order and clients user meta
+	 *
+	 * @param WC_Order $order
+	 * @param $data
+	 *
+	 * @throws Exception
+	 */
+	public function repack_save_order( $order, $data ) {
         $nonce_value = wc_get_var( $_REQUEST['woocommerce-process-checkout-nonce'], wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
 
-        if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
-            WC()->session->set( 'refresh_totals', true );
-            throw new Exception( __( 'We were unable to process your order, please try again.', 'repack' ) );
-        }
+		if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'woocommerce-process_checkout' ) ) {
+			WC()->session->set( 'refresh_totals', true );
+			throw new Exception( __( 'We were unable to process your order, please try again.', 'repack' ) );
+		}
 
-        if ( isset( $_POST['shipping_repack'] ) && isset( $_POST['repack_counter'] ) && ! empty( $_POST['shipping_repack'] ) && ! empty( $_POST['repack_counter'] ) ) {
-            // Save order meta & count saved packages
-            $order->update_meta_data( '_' . $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
+		if ( isset( $_POST['shipping_repack'] ) && isset( $_POST['repack_counter'] ) && ! empty( $_POST['shipping_repack'] ) && ! empty( $_POST['repack_counter'] ) ) {
+			// Save order meta & count saved packages
+			$order->update_meta_data( '_' . $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
 
-            // Add order note
-            $order->add_order_note( __( 'Shipping with reused packaging preferred!', 'repack' ), true, false );
+			// Add order note
+			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'repack' ), true, false );
 
-            // Update global RePack counter
-            $this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );
+			// Update global RePack counter
+			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );
 
-            // Save customer decision for next order & count saved packages of user
-            update_user_meta( $order->get_customer_id(), $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
-            update_user_meta(
-                $order->get_customer_id(),
-                $this->meta_name . '_counter',
-                (int) $this->get_user_repack_counter( $order->get_customer_id() ) + absint( $_POST['repack_counter'] )
-            );
-        }
-    }
+			// Save customer decision for next order & count saved packages of user
+			update_user_meta( $order->get_customer_id(), $this->meta_name, wc_bool_to_string( $_POST['shipping_repack'] ) );
+			update_user_meta(
+				$order->get_customer_id(),
+				$this->meta_name . '_counter',
+				(int) $this->get_user_repack_counter( $order->get_customer_id() ) + absint( $_POST['repack_counter'] )
+			);
+		}
+	}
 
 	/**
 	 * User: Get user repack setting
@@ -452,95 +461,118 @@ class Repack_Public {
 		);
 	}
 
-    /**
-     * Get total amount of repacked packages
-     *
-     * @return bool|mixed|void
-     */
-    public static function get_global_repack_counter() {
-        return get_option( 'repack_counter' );
-    }
+	/**
+	 * Get total amount of repacked packages
+	 *
+	 * @return bool|mixed|void
+	 */
+	public static function get_global_repack_counter() {
+		return get_option( 'repack_counter' );
+	}
 
-    /**
-     * Get calculated savings as value or string: Packages, Trees, Water & CO2
-     *
-     * @param string $type co2, water or trees. Default is packages
-     * @param null $packages The amount of packages used for calculation
-     * @param bool $value Return only value without unit
-     *
-     * @return string
-     */
-    public static function get_repack_savings($type = '', $packages = null, $value = false)
-    {
-        // If no amount is passed, get total savings
-        $packages = $packages !== null ? $packages : self::get_global_repack_counter();
+	/**
+	 * Get calculated savings as value or string: Packages, Trees, Water & CO2
+	 *
+	 * @param string $type co2, water or trees. Default is packages
+	 * @param null $packages The amount of packages used for calculation
+	 * @param bool $value Return only value without unit
+	 *
+	 * @return string
+	 */
+	public static function get_repack_savings( $type = '', $packages = null, $value = false ) {
+		// If no amount is passed, get total savings
+		$packages = null !== $packages ? $packages : self::get_global_repack_counter();
 
-        // Return Saved Water in litre
-        if($type == 'water') {
-            $water = round($packages * 123, 1);
-            return $value ? $water : sprintf(
-            /* translators: %s lites of water */
-                __( '%s litres of water', 'repack' ),
-                $water
-            );
-        }
+		// Return Saved Water in litre
+		if ( 'water' === $type ) {
+			$water = round( $packages * 123, 1 );
+			return $value ? $water : sprintf(
+			/* translators: %s lites of water */
+				__( '%s litres of water', 'repack' ),
+				self::get_counter_span( $water )
+			);
+		}
 
-        // Return CO2 Savings in gram
-        if($type == 'co2') {
-            $co2 = round($packages * 156, 1);
-            return $value ? $co2 : sprintf(
-            /* translators: %s grams of CO2 */
-                __( '%s grams of CO2', 'repack' ),
-                $co2
-            );
-        }
+		// Return CO2 Savings in gram
+		if ( 'co2' === $type ) {
+			$co2 = round( $packages * 156, 1 );
+			return $value ? $co2 : sprintf(
+			/* translators: %s grams of CO2 */
+				__( '%s grams of CO2', 'repack' ),
+				self::get_counter_span( $co2 )
+			);
+		}
 
-        // Return Saved Mature Trees
-        if($type == 'trees') {
-            $trees = round($packages * 0.0024, 1);
-            return $value ? $trees : sprintf(
-            /* translators: %s mature trees */
-                __( '%s mature trees', 'repack' ),
-                $trees
-            );
-        }
+		// Return Saved Mature Trees
+		if ( 'trees' === $type ) {
+			$trees = round( $packages * 0.0024, 1 );
+			return $value ? $trees : sprintf(
+			/* translators: %s mature trees */
+				__( '%s mature trees', 'repack' ),
+				self::get_counter_span( $trees, '', 1 )
+			);
+		}
 
-        return $value ? $packages : sprintf(
-        /* translators: %s packaging reused */
-            __( '%s packaging', 'repack' ),
-            $packages
-        );
-    }
+		return $value ? $packages : sprintf(
+		/* translators: %s packaging reused */
+			__( '%s packaging', 'repack' ),
+			self::get_counter_span( $packages )
+		);
+	}
 
-    /**
-     * Pass data and render saving template
-     *
-     * @param null $packages
-     * @return false|string
-     */
-    public static function get_repack_summary($packages = null) {
-        $template_loader = new Repack_Template_Loader();
+	/**
+	 * Get Counter Markup
+	 *
+	 * @param $value
+	 * @param string $suffix
+	 * @param int $decimals
+	 * @return string
+	 */
+	public static function get_counter_span( $value, $suffix = '', $decimals = 0 ) {
+		return wp_kses_post( "<span class='repack-counter' data-countup='$value' data-countup-suffix='$suffix'>" . number_format_i18n( $value, $decimals ) . $suffix . '</span>' );
+	}
 
-        ob_start();
-        $template_loader
-            ->set_template_data(
-                apply_filters('repack_template_summary_data',
-                    array(
-                        'start'     => get_option( 'repack_start' )
-                    )
-                ))
-            ->set_template_data(
-                apply_filters('repack_template_summary_saving',
-                    array(
-                        'packaging'  => self::get_repack_savings('packaging', $packages),
-                        'co2'        => self::get_repack_savings('co2', $packages),
-                        'water'      => self::get_repack_savings('water', $packages),
-                        'trees'      => self::get_repack_savings('trees', $packages),
-                    )
-                ), 'saving')
-            ->get_template_part('summary');
-        return ob_get_clean();
-    }
+	/**
+	 * Pass data and render saving template
+	 *
+	 * @param null $packages
+	 * @return false|string
+	 */
+	public static function get_repack_summary( $packages = null ) {
+		$template_loader = new Repack_Template_Loader();
+
+		ob_start();
+		$template_loader
+			->set_template_data(
+				apply_filters(
+					'repack_template_summary_data',
+					array(
+						'start'    => get_option( 'repack_start' ),
+						'next'     => $packages + 1 . self::get_repack_ordinal_suffix( $packages + 1 ),
+						'werepack' => array(
+							'logo'  => esc_url( REPACK_PLUGIN_URL . '/public/images/werepack-teal-mini.png' ),
+							'title' => 'WeRePack.org',
+							'url'   => esc_url( 'https://WeRePack.org/' ),
+						),
+					)
+				)
+			)
+			->set_template_data(
+				apply_filters(
+					'repack_template_summary_saving',
+					array(
+						'counter'   => self::get_repack_savings( 'packaging', $packages, true ),
+						'packaging' => self::get_repack_savings( 'packaging', $packages ),
+						'co2'       => self::get_repack_savings( 'co2', $packages ),
+						'water'     => self::get_repack_savings( 'water', $packages ),
+						'trees'     => self::get_repack_savings( 'trees', $packages ),
+					)
+				),
+				'saving'
+			)
+			->get_template_part( 'summary' );
+		return ob_get_clean();
+	}
 
 	/**
 	 * RePack Shortcode
@@ -548,51 +580,75 @@ class Repack_Public {
 	 * @return void
 	 */
 	public function repack_shortcodes() {
-	    // [repack]
-	    add_shortcode(
-	            'repack',
-                function( $attributes ) {
-                    // Extract attributes
-                    $attributes = shortcode_atts(
-                        array(
-                            'prepend'  => '',
-                            'append'   => '',
-                            'type'     => null,
-                            'packages' => null,
-                            'value'    => false,
-                            'user_id'  => null,
+		add_shortcode(
+			'repack',
+			function( $attributes ) {
+				// Extract attributes
+				$attributes = shortcode_atts(
+					array(
+						'prepend'  => '',
+						'append'   => '',
+						'type'     => null,
+						'packages' => null,
+						'value'    => false,
+						'user_id'  => null,
 
-                        ),
-                        $attributes,
-                        'repack'
-                    );
+					),
+					$attributes,
+					'repack'
+				);
 
-                    // Get packages by user, value passed or site total
-                    $packages = (int) $attributes['user_id'] && !$attributes['packages'] ?
-                        $this->get_user_repack_counter( (int) $attributes['user_id'] ) :
-                        $attributes['packages'];
+				// Get packages by user, value passed or site total
+				$packages = (int) $attributes['user_id'] && ! $attributes['packages'] ?
+					$this->get_user_repack_counter( (int) $attributes['user_id'] ) :
+					$attributes['packages'];
 
-                    return $attributes['prepend'] . $this->get_repack_savings($attributes['type'], $packages == null ? '0' : $packages, $attributes['value']) . $attributes['append'];
-                }
-        );
+				return $attributes['prepend'] . $this->get_repack_savings( $attributes['type'], null === $packages ? '0' : $packages, $attributes['value'] ) . $attributes['append'];
+			}
+		);
 
-        // [repack_summary]
-        add_shortcode(
-            'repack_summary',
-            function( $attributes ) {
-                // Extract attributes
-                $attributes = shortcode_atts(
-                    array(
-                        'prepend'  => '',
-                        'packages' => null,
-                        'append'   => '',
-                    ),
-                    $attributes,
-                    'repack_summary'
-                );
+		add_shortcode(
+			'repack_summary',
+			function( $attributes ) {
+				// Extract attributes
+				$attributes = shortcode_atts(
+					array(
+						'prepend'  => '',
+						'packages' => null,
+						'append'   => '',
+					),
+					$attributes,
+					'repack_summary'
+				);
 
-                return $attributes['prepend'] .  $this->get_repack_summary($attributes['packages']) . $attributes['append'];
-            }
-        );
+				return $attributes['prepend'] . $this->get_repack_summary( $attributes['packages'] ) . $attributes['append'];
+			}
+		);
+	}
+
+	/**
+	 * Get Ordinal Suffix of a Number
+	 *
+	 * @param $num
+	 *
+	 * @return string
+	 */
+	public static function get_repack_ordinal_suffix( $num ) {
+		if ( substr( get_locale(), 0, 2 ) !== 'en' ) {
+			return '.';
+		}
+
+		$num = $num % 100; // protect against large numbers
+		if ( $num < 11 || $num > 13 ) {
+			switch ( $num % 10 ) {
+				case 1:
+					return 'st';
+				case 2:
+					return 'nd';
+				case 3:
+					return 'rd';
+			}
+		}
+		return 'th';
 	}
 }
