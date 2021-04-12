@@ -14,7 +14,7 @@ Ask for customer permission to ship reused shipping packaging. Show your support
 == Description ==
 
 This plugin is part of the WeRePack.org initiative to avoid packaging waste and helps shop owners and their customers save resources.
-To do this, the plugin adds a field in the WooCommerce payment process where customers can give their consent to receive reused shipping packaging. So simple, so effective. And with lots of customization options via filters, let us know if there's anything else you need.
+To do this, the plugin adds a field in the WooCommerce checkout process where customers can give their consent to receive reused shipping packaging. So simple, so effective. And with lots of customization options via filters, let us know if there's anything else you need.
 
 **Current features**
 
@@ -30,13 +30,13 @@ To do this, the plugin adds a field in the WooCommerce payment process where cus
 
 *  Gutenberg Block additionally to Shortcode, which visually represents the savings to date.
 
-**Templates**
+**Shortcodes**
 
 You can use the following shortcodes and functions to show your savings:
 
-*** Shortcode `[repack]`***
+***Shortcode `[repack]`***
 
-Display the savings of your site or individual users such as: Amount of reused packages, water saved, CO2 saved and mature trees saved. The shortcode attributes:
+Display the savings of your site or individual users such as: Amount of reused packages, water saved, CO2 saved and mature trees saved. The shortcode attributes are:
 
 * `type=""`: What amount to display: "packaging" (default), "co2", "water" or "trees"
 * `value=""`: Set to `true` if you only want to display the number/quantity without unit (e.g. "litres of water")
@@ -45,11 +45,11 @@ Display the savings of your site or individual users such as: Amount of reused p
 * `prepend=""`: HTML to prepend to output. Default: Empty string
 * `append=""`:  HTML to append to output. Default: Empty string
 
-*** Shortcode `[repack_summary]` or function `Repack_Public::get_repack_summary()`***
+***Shortcode `[repack_summary]`***
 
-Displays a summary of you sites packaging savings. You can copy and overwrite the template file from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`.
+Displays a summary of you sites savings. You can copy and overwrite the template file from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`.
 
-* `packages=""`: Lets you overwrite the number of packages the output is calculated with. Leave empty to get your sites counter.
+* `packages=""`: Lets you overwrite the number of packages the output is calculated with. Leave empty to use your sites counter.
 * `prepend=""`: HTML to prepend to output. Default: Empty string
 * `append=""`:  HTML to append to output. Default: Empty string
 
@@ -66,7 +66,7 @@ You can customize the plugin behavior and text by using the following filters in
 *   `repack_coupon_removed_notice_text`: Notice text after coupon was removed.
 *   `repack_email_label`: Label in WooCommerce mails if consent was given.
 *   `repack_email_text`: Text in WooCommerce mails if consent was given.
-*   `repack_deactivate_remove_all_meta: Set to `true` to delete all plugin related metadata on deactivation.
+*   `repack_deactivate_remove_all_meta`: Set to `true` to delete all plugin related metadata on deactivation.
 *   `repack_template_summary_data`: `$data` object passed to summary.php template.
 *   `repack_template_summary_saving`: `$saving` object passed to summary.php template.
 
@@ -88,11 +88,6 @@ No! You are not! But you can show your good will and that you are not taking par
 
 The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new coupon named 'WeRePack', it will be added or removed automatically when you select the RePack checkbox. If you want to name coupon differently, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
 
-= How to use the shortcode =
-
-Use the shortcode wherever you want with `[repack]`. This will output the amount of packaging the shop saved in total. You can prepend and append text to that number with attributes: `[repack prepend="Wow! We already saved " append=" packaging so far"]`.
-if you additionally set the attribute `user_id` the amount of packaging a single user has saved will be displayed. A neat way to further motivate recurring users: `[repack user_id="123" prepend="Thank you! Together we already saved " append=" packaging."]`
-
 = I like the initiative and want to support you =
 
 Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/repack-for-woocommerce "RePack on GitHub"), translate the plugin. We really appreciate every support.
@@ -101,13 +96,16 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 1. Checkbox animation, adapts to your Theme Design
 2. Shipping notice in WooCommerce Order Overview
+3. Optionally integrates with WooCommerce Coupons
+4. Optionally share your savings and ...
+5. ... get listed as Supporter on WeRePack.org
 
 == Changelog ==
 
 = 1.1.0 =
-* Adds Telemetry Module: We want to win you as a supporter and measure our joint success. To do this, you can share some stats with us in order to get listed in the supporter directory on WeRePack.org.
-* Adds summary shortcode and template. You can copy and overwrite it in your theme from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`
 * Various improvements
+* Adds summary shortcode and template. You can copy and overwrite it in your theme from plugins folder `/public/templates/summary.php` to your themes folder `/repack/summary.php`
+* Adds Telemetry Module: We want to win you as a supporter and measure our joint success. To do this, you can share some stats with us in order to get listed in the supporter directory on WeRePack.org.
 
 = 1.0.6 =
 * Adds filter `repack_deactivate_remove_all_meta` which when true removes all plugin related data from the DB on plugin deactivation.
