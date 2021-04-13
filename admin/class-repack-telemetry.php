@@ -157,8 +157,8 @@ class Repack_Telemetry {
 						<?php
 						printf(
 						/* translators: %1$s: URL to the server plugin code. %2$s: URL to the stats page. */
-							__( 'We believe in complete transparency. You can see the code used on our server <a href="%1$s" rel="nofollow">here</a>, and the results of the statistics we\'re gathering on <a href="%2$s" rel="nofollow">this page</a>.', 'repack-for-woocommerce' ), // phpcs:ignore WordPress.Security.EscapeOutput
-							'https://github.com/ouun/repack-for-woocommerce',
+							__( 'We believe in complete transparency. You can see the code used on our server <a href="%1$s" target="_blank" rel="nofollow">here</a>, and the results of the statistics we\'re gathering on <a href="%2$s" target="_blank" rel="nofollow">this page</a>.', 'repack-for-woocommerce' ), // phpcs:ignore WordPress.Security.EscapeOutput
+							'https://github.com/ouun/repack-telemetry-server/',
 							'https://werepack.org/repack-telemetry-statistics/'
 						);
 						?>
