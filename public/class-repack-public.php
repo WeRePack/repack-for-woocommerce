@@ -458,7 +458,7 @@ class Repack_Public {
 			$user_id,
 			$this->meta_name . '_counter',
 			true
-		);
+		) ?: '0';
 	}
 
 	/**
@@ -467,7 +467,7 @@ class Repack_Public {
 	 * @return bool|mixed|void
 	 */
 	public static function get_global_repack_counter() {
-		return get_option( 'repack_counter' );
+		return get_option( 'repack_counter' ) ?: '0';
 	}
 
 	/**

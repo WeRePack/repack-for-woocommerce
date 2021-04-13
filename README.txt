@@ -108,6 +108,9 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.1.4 =
+* Various small improvements
+
 = 1.1.3 =
 * Rename translation files to fit text domain
 
