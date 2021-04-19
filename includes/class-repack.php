@@ -193,7 +193,7 @@ class Repack {
 		$this->loader->add_action( 'init', $plugin_public, 'repack_shortcodes' );
 
 		// Set the Coupon name for further usage
-		$this->loader->add_action( 'init', $plugin_public, 'repack_set_coupon_name' );
+		$this->loader->add_action( 'init', $plugin_public, 'set_repack_coupon_name' );
 
 		// Add RePack field to checkout and user shipping settings
 		$this->loader->add_filter( 'woocommerce_shipping_fields', $plugin_public, 'add_shipping_repack_field', 20, 1 );

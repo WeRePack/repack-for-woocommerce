@@ -108,6 +108,12 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.1.5 =
+* Enh: WooCommerce Tested 5.2
+* Enh: Add start date to summary template
+* Enh: Adds availability of a coupon code to telemetry module
+* Fix: Next packaging counter
+
 = 1.1.4 =
 * Various small improvements
 

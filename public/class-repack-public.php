@@ -103,10 +103,37 @@ class Repack_Public {
 	}
 
 	/**
-	 * Set the Coupon name for further usage
+	 * Set WeRePack Coupon Code for further usage
 	 */
-	public function repack_set_coupon_name() {
-		$this->coupon_name = wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
+	public function set_repack_coupon_name() {
+		$this->coupon_name = self::get_repack_coupon_name();
+	}
+
+	/**
+	 * Get WeRePack Coupon Code
+	 *
+	 * @return string
+	 */
+	public static function get_repack_coupon_name() {
+		return wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
+	}
+
+	/**
+	 * Get coupon ID
+	 *
+	 * @return int
+	 */
+	public static function get_repack_coupon_id() {
+		return wc_get_coupon_id_by_code( self::get_repack_coupon_name() );
+	}
+
+	/**
+	 * Coupon exists
+	 *
+	 * @return bool
+	 */
+	public static function repack_coupon_exists() {
+		return self::get_repack_coupon_id() > 0;
 	}
 
 	/**
@@ -374,15 +401,6 @@ class Repack_Public {
 	}
 
 	/**
-	 * Check for available coupon code?
-	 *
-	 * @return bool
-	 */
-	public function repack_coupon_exists() {
-		return wc_get_coupon_id_by_code( $this->coupon_name ) > 0;
-	}
-
-	/**
 	 * Global RePack counter update
 	 *
 	 * @param int $packages
@@ -540,6 +558,7 @@ class Repack_Public {
 	 */
 	public static function get_repack_summary( $packages = null ) {
 		$template_loader = new Repack_Template_Loader();
+		$packages        = $packages ?: self::get_repack_savings( 'packaging', $packages, true );
 
 		ob_start();
 		$template_loader
@@ -547,21 +566,20 @@ class Repack_Public {
 				apply_filters(
 					'repack_template_summary_data',
 					array(
-						'start'    => get_option( 'repack_start' ),
-						'next'     => $packages + 1 . self::get_repack_ordinal_suffix( $packages + 1 ),
-						'werepack' => array(
-							'logo'  => esc_url( REPACK_PLUGIN_URL . '/public/images/werepack-teal-mini.png' ),
-							'title' => 'WeRePack.org',
-							'url'   => esc_url( 'https://WeRePack.org/' ),
-						),
+						'start' => wp_date( get_option( 'date_format' ), get_option( 'repack_start' ) ),
+						'logo'  => esc_url( REPACK_PLUGIN_URL . '/public/images/werepack-teal-mini.png' ),
+						'title' => 'WeRePack.org',
+						'url'   => esc_url( 'https://WeRePack.org/' ),
 					)
-				)
+				),
+				'werepack'
 			)
 			->set_template_data(
 				apply_filters(
 					'repack_template_summary_saving',
 					array(
-						'counter'   => self::get_repack_savings( 'packaging', $packages, true ),
+						'counter'   => $packages,
+						'next'      => $packages + 1 . self::get_repack_ordinal_suffix( $packages + 1 ),
 						'packaging' => self::get_repack_savings( 'packaging', $packages ),
 						'co2'       => self::get_repack_savings( 'co2', $packages ),
 						'water'     => self::get_repack_savings( 'water', $packages ),

@@ -138,9 +138,10 @@ class Repack_Telemetry {
 				<tr>
 					<td><?php esc_html_e( 'Website Language', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( $data['siteLang'] ); ?></code></td>
-				</tr><tr>
+				</tr>
+				<tr>
 					<td><?php esc_html_e( 'RePack Start', 'repack-for-woocommerce' ); ?></td>
-					<td><code><?php echo esc_html( wp_date( get_option('date_format'), $data['repackStart'] ) ); ?></code></td>
+					<td><code><?php echo esc_html( wp_date( get_option( 'date_format' ), $data['repackStart'] ) ); ?></code></td>
 				</tr>
 				<tr>
 					<td><?php esc_html_e( 'RePack Consents', 'repack-for-woocommerce' ); ?></td>
@@ -149,6 +150,10 @@ class Repack_Telemetry {
 				<tr>
 					<td><?php esc_html_e( 'RePack Consent Ratio', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( $data['repackRatio'] . '%' ); ?></code></td>
+				</tr>
+				<tr>
+					<td><?php esc_html_e( 'WeRePack Coupon', 'repack-for-woocommerce' ); ?></td>
+					<td><code><?php echo esc_html( $data['repackCoupon'] ? __( 'Available', 'repack-for-woocommerce' ) : __( 'Not available', 'repack-for-woocommerce' ) ); ?></code></td>
 				</tr>
 				</tbody>
 				<tfoot>
@@ -201,6 +206,7 @@ class Repack_Telemetry {
 			'repackStart'    => get_option( 'repack_start' ),
 			'repackCounter'  => get_option( 'repack_counter' ),
 			'repackRatio'    => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
+			'repackCoupon'   => Repack_Public::repack_coupon_exists(),
 			'repackLastSent' => get_option( 'repack_telemetry_sent' ),
 		);
 	}
@@ -227,6 +233,10 @@ class Repack_Telemetry {
 				),
 			)
 		);
+
+		if ( $consents === 0 || $orders->found_posts === 0 ) {
+			return '0';
+		}
 
 		$ratio = round( $consents * 100 / $orders->found_posts );
 
