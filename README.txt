@@ -108,6 +108,9 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.1.6 =
+* Fix: Translation files missing strings
+
 = 1.1.5 =
 * Enh: WooCommerce Tested 5.2
 * Enh: Add start date to summary template
