@@ -108,6 +108,9 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.1.7 =
+* Enh: Schedule WordPress Cron for Telemetry
+
 = 1.1.6 =
 * Fix: Translation files missing strings
 

@@ -34,6 +34,11 @@ class Repack_Activator {
 		// Add RePack counter option
 		add_option( 'repack_counter' );
 		// Add the start time
-		update_option( 'repack_start', current_datetime()->getTimestamp() );
+		add_option( 'repack_start', current_datetime()->getTimestamp() );
+        // Schedule recurring event
+        // Note: No data sending without consent
+        if (! wp_next_scheduled ( 'repack_telemetry' )) {
+            wp_schedule_event( time(), 'weekly', 'repack_telemetry' );
+        }
 	}
 }

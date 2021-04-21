@@ -51,8 +51,8 @@ class Repack_Telemetry {
 		$this->dismiss_notice();
 		$this->consent();
 
-		// This is the last thing to run. No impact on performance or anything else.
-		add_action( 'wp_footer', array( $this, 'maybe_send_data' ), 99999 );
+		// Scheduled event to trigger telemetry
+        add_action( 'repack_telemetry', array($this, 'maybe_send_data') );
 	}
 
 	/**
@@ -63,33 +63,27 @@ class Repack_Telemetry {
 	 * @return void
 	 */
 	public function maybe_send_data() {
-
 		// Check if the user has consented to the data sending.
 		if ( ! get_option( 'repack_telemetry_optin' ) ) {
 			return;
 		}
 
-		// Only send data once/week. We use an option instead of a transient
-		// because transients in some managed hosting environments don't properly update
-		// due to their caching implementations.
-		$sent = get_option( 'repack_telemetry_sent' );
-		if ( ! $sent || $sent < time() - WEEK_IN_SECONDS ) {
-			$this->send_data();
-			update_option( 'repack_telemetry_sent', time() );
-		}
+		// Send data & update sent value
+        if(!is_wp_error($this->send_data())) {
+            update_option( 'repack_telemetry_sent', time() );
+        }
 	}
 
-	/**
-	 * Sends data.
-	 *
-	 * @access private
-	 * @since 1.1.0
-	 * @return void
-	 */
+    /**
+     * Sends data.
+     *
+     * @access private
+     * @since 1.1.0
+     * @return array|WP_Error
+     */
 	private function send_data() {
-
 		// Ping remote server.
-		wp_remote_post(
+		return wp_remote_post(
 			'https://werepack.org/?action=repack-stats',
 			array(
 				'method'   => 'POST',
@@ -98,7 +92,9 @@ class Repack_Telemetry {
 					array(
 						'action' => 'repack-stats',
 					),
-					$this->get_data()
+					$this->get_data([
+                        'repackLastSent' => time()
+                    ])
 				),
 			)
 		);
@@ -191,16 +187,17 @@ class Repack_Telemetry {
 		$this->table_styles();
 	}
 
-	/**
-	 * Builds and returns the data or uses cached if data already exists.
-	 *
-	 * @access private
-	 * @since 1.1.0
-	 * @return array
-	 */
-	private function get_data() {
+    /**
+     * Builds and returns the data or uses cached if data already exists.
+     *
+     * @access private
+     * @param array $data
+     * @return array
+     * @since 1.1.0
+     */
+	private function get_data( $data = [] ) {
 		// Build data and return the array.
-		return array(
+		return wp_parse_args(array(
 			'siteURL'        => home_url( '/' ),
 			'siteLang'       => get_locale(),
 			'repackStart'    => get_option( 'repack_start' ),
@@ -208,7 +205,7 @@ class Repack_Telemetry {
 			'repackRatio'    => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
 			'repackCoupon'   => Repack_Public::repack_coupon_exists(),
 			'repackLastSent' => get_option( 'repack_telemetry_sent' ),
-		);
+		), $data);
 	}
 
 	/**
@@ -278,8 +275,11 @@ class Repack_Telemetry {
 			if ( 'telemetry' === sanitize_text_field( wp_unslash( $_GET['repack-consent-notice'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				// Check the wp-nonce.
 				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) ) ) {
-					// All good, we can save the option to dismiss this notice.
-					update_option( 'repack_telemetry_optin', true );
+                    // Initially send the data in a minute
+                    if( wp_schedule_single_event(time() + MINUTE_IN_SECONDS, 'repack_telemetry') ) {
+                        // All good, we can save the option to dismiss this notice.
+                        update_option( 'repack_telemetry_optin', true );
+                    }
 				}
 			}
 		}

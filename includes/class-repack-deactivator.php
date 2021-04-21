@@ -59,5 +59,8 @@ class Repack_Deactivator {
 				);
 			}
 		}
+
+        // Clear scheduled event
+        wp_clear_scheduled_hook( 'repack_telemetry' );
 	}
 }
