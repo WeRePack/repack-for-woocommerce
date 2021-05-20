@@ -25,6 +25,7 @@ To do this, the plugin adds a field in the WooCommerce checkout process where cu
 *   Clean code, no ads & no annoying notifications
 *   Highly customizable via Hooks & Filters
 *   Optionally share basic stats, help us improve and get listed on WeRePack.org as a supporter site.
+*   Available translations: English, German & German (formal)
 
 **Coming soon**
 
@@ -86,11 +87,11 @@ No! You are not! But you can show your good will and that you are not taking par
 
 = How to set up and customize a coupon code =
 
-The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new coupon named 'WeRePack', it will be added or removed automatically when you select the RePack checkbox. If you want to name coupon differently, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
+The plugin gives you maximum flexibility and accepts all WooCommerce coupons that can be applied to the shopping cart. Just create a new coupon named 'WeRePack', it will be added or removed automatically when you toggle the checkout checkbox. If you want to rename the coupon, add the filter `add_filter( 'repack_coupon_name', 'MyCouponName' )` to your `functions.php`.
 
 = I like the initiative and want to support you =
 
-Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/repack-for-woocommerce "RePack on GitHub"), translate the plugin. We really appreciate every support.
+Yes, please! We need every heart, hand and mouth. Talk about us, help us improve the code [on GitHub](https://github.com/ouun/repack-for-woocommerce "WeRePack on GitHub"), translate the plugin. We really appreciate every support.
 
 = My language is missing. How to contribute it? =
 
@@ -127,7 +128,7 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 * Rename translation files to fit text domain
 
 = 1.1.2 =
-* Switch text-domain to support WP.org GlotPress Translations at [translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "Translate RePack Plugin")
+* Switch text-domain to support WP.org GlotPress Translations at [translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "Translate WeRePack Plugin")
 
 = 1.1.1 =
 * Update Translations: English, German (formal) & German (informal)
