@@ -14,7 +14,7 @@
  */
 
 /**
- * The RePack core plugin class.
+ * The WeRePack core plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
  * public-facing site hooks.
@@ -189,13 +189,13 @@ class Repack {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		// Register RePack Shortcodes
+		// Register WeRePack Shortcodes
 		$this->loader->add_action( 'init', $plugin_public, 'repack_shortcodes' );
 
 		// Set the Coupon name for further usage
 		$this->loader->add_action( 'init', $plugin_public, 'set_repack_coupon_name' );
 
-		// Add RePack field to checkout and user shipping settings
+		// Add WeRePack field to checkout and user shipping settings
 		$this->loader->add_filter( 'woocommerce_shipping_fields', $plugin_public, 'add_shipping_repack_field', 20, 1 );
 		$this->loader->add_filter( 'woocommerce_checkout_get_value', $plugin_public, 'repack_checkout_consent_value', 10, 2 );
 		$this->loader->add_action(

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * RePack bootstrap file
+ * WeRePack bootstrap file
  *
  * @link              https://WeRePack.org
  * @since             1.0.0
  * @package           Repack
  *
  * @wordpress-plugin
- * Plugin Name:       RePack - Reuse Packaging for WooCommerce
+ * Plugin Name:       WeRePack - Reuse Packaging for WooCommerce
  * Plugin URI:        https://WeRePack.org/
  * Description:       Get permission from your customers to reuse already used shipping packaging. As a shop owner it is an easy way to save resources, money and above all to protect the environment.
  * Version:           1.1.7
@@ -18,7 +18,7 @@
  * Domain Path:       /languages
  *
  * WC requires at least: 3.6
- * WC tested up to: 5.2
+ * WC tested up to: 5.3
  *
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

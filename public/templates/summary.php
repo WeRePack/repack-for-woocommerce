@@ -1,8 +1,8 @@
 <?php
 /**
- * Template to render RePack Statistics.
+ * Template to render WeRePack Statistics.
  *
- * @package   RePack
+ * @package   WeRePack
  * @since     1.1.0
  * @copyright Copyright (c) 2021, WeRePack.org
  * @license   GPL-2.0+

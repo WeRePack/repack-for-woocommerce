@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Loader for RePack
+ * Template Loader for WeRePack
  *
  * @link       https://WeRePack.org
  * @since      1.0.0
@@ -11,7 +11,7 @@
  */
 
 /**
- * Register Template Loader for RePack. This is a fork from Gary Jones's Template Loader.
+ * Register Template Loader for WeRePack. This is a fork from Gary Jones's Template Loader.
  *
  * @author    Gary Jones
  * @link      http://github.com/GaryJones/Gamajo-Template-Loader

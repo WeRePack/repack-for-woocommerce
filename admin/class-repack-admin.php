@@ -78,7 +78,7 @@ class Repack_Admin {
 
 
 	/**
-	 * Get RePack order meta
+	 * Get WeRePack order meta
 	 *
 	 * @param WC_Order $order
 	 *
@@ -106,7 +106,7 @@ class Repack_Admin {
 
 
 	/**
-	 * RePack section in order overwiew
+	 * WeRePack section in order overwiew
 	 *
 	 * @param $order
 	 */
@@ -127,7 +127,7 @@ class Repack_Admin {
 	}
 
 	/**
-	 * Add RePack field to order shipping details
+	 * Add WeRePack field to order shipping details
 	 *
 	 * @param $fields
 	 *

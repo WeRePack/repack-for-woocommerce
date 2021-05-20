@@ -176,7 +176,7 @@ class Repack_Public {
 	}
 
 	/**
-	 * Append RePack section to checkout fields.
+	 * Append WeRePack section to checkout fields.
 	 *
 	 * @param WC_Checkout $checkout
 	 *
@@ -291,7 +291,7 @@ class Repack_Public {
 	}
 
 	/**
-	 * Add RePack field to shipping settings (e.g. My Account)
+	 * Add WeRePack field to shipping settings (e.g. My Account)
 	 *
 	 * @param $fields
 	 *
@@ -311,7 +311,7 @@ class Repack_Public {
 	/**
 	 * Coupon Code handling
 	 *
-	 * @param bool|null $value  RePack checkbox value
+	 * @param bool|null $value  WeRePack checkbox value
 	 *
 	 * @since    1.0.0
 	 */
@@ -358,7 +358,7 @@ class Repack_Public {
 	}
 
 	/**
-	 * AJAX Apply RePack Coupon
+	 * AJAX Apply WeRePack Coupon
 	 */
 	public function repack_checkout_apply_coupon() {
 		if ( $this->repack_coupon_exists() ) {
@@ -380,7 +380,7 @@ class Repack_Public {
 	}
 
 	/**
-	 * AJAX Apply RePack Coupon
+	 * AJAX Apply WeRePack Coupon
 	 */
 	public function repack_ajax_apply_coupon() {
 
@@ -401,7 +401,7 @@ class Repack_Public {
 	}
 
 	/**
-	 * Global RePack counter update
+	 * Global WeRePack counter update
 	 *
 	 * @param int $packages
 	 *
@@ -438,7 +438,7 @@ class Repack_Public {
 			// Add order note
 			$order->add_order_note( __( 'Shipping with reused packaging preferred!', 'repack-for-woocommerce' ), true, false );
 
-			// Update global RePack counter
+			// Update global WeRePack counter
 			$this->update_global_repack_counter( absint( $_POST['repack_counter'] ) );
 
 			// Save customer decision for next order & count saved packages of user
@@ -593,7 +593,7 @@ class Repack_Public {
 	}
 
 	/**
-	 * RePack Shortcode
+	 * WeRePack Shortcode
 	 *
 	 * @return void
 	 */

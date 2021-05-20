@@ -136,15 +136,15 @@ class Repack_Telemetry {
 					<td><code><?php echo esc_html( $data['siteLang'] ); ?></code></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'RePack Start', 'repack-for-woocommerce' ); ?></td>
+					<td><?php esc_html_e( 'WeRePack Start', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( wp_date( get_option( 'date_format' ), $data['repackStart'] ) ); ?></code></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'RePack Consents', 'repack-for-woocommerce' ); ?></td>
+					<td><?php esc_html_e( 'WeRePack Consents', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( ! empty( $data['repackCounter'] ) ? $data['repackCounter'] : __( 'None yet', 'repack-for-woocommerce' ) ); ?></code></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'RePack Consent Ratio', 'repack-for-woocommerce' ); ?></td>
+					<td><?php esc_html_e( 'WeRePack Consent Ratio', 'repack-for-woocommerce' ); ?></td>
 					<td><code><?php echo esc_html( $data['repackRatio'] . '%' ); ?></code></td>
 				</tr>
 				<tr>
@@ -197,7 +197,7 @@ class Repack_Telemetry {
      */
 	private function get_data( $data = [] ) {
 		// Build data and return the array.
-		return wp_parse_args(array(
+		return wp_parse_args($data, array(
 			'siteURL'        => home_url( '/' ),
 			'siteLang'       => get_locale(),
 			'repackStart'    => get_option( 'repack_start' ),
@@ -205,7 +205,7 @@ class Repack_Telemetry {
 			'repackRatio'    => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
 			'repackCoupon'   => Repack_Public::repack_coupon_exists(),
 			'repackLastSent' => get_option( 'repack_telemetry_sent' ),
-		), $data);
+		));
 	}
 
 	/**
