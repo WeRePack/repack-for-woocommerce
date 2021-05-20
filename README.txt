@@ -109,6 +109,9 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.1.8 =
+* Enh: Rename plugin to WeRePack to inline with initiatives name
+
 = 1.1.7 =
 * Enh: Schedule WordPress Cron for Telemetry
 
