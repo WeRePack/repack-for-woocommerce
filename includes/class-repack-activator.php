@@ -35,10 +35,10 @@ class Repack_Activator {
 		add_option( 'repack_counter' );
 		// Add the start time
 		add_option( 'repack_start', current_datetime()->getTimestamp() );
-        // Schedule recurring event
-        // Note: No data sending without consent
-        if (! wp_next_scheduled ( 'repack_telemetry' )) {
-            wp_schedule_event( time(), 'weekly', 'repack_telemetry' );
-        }
+		// Schedule recurring event
+		// Note: No data sending without consent
+		if ( ! wp_next_scheduled( 'repack_telemetry' ) ) {
+			wp_schedule_event( time(), 'weekly', 'repack_telemetry' );
+		}
 	}
 }

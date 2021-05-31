@@ -66,9 +66,14 @@ class Repack_Admin {
 		$this->meta_name   = $meta_name;
 
 		/**
+		 * The WooCommerce Settings Page.
+		 */
+		require_once REPACK_PLUGIN_DIR . 'admin/partials/repack-admin-settings.php';
+
+		/**
 		 * The class responsible for running telemetry.
 		 */
-		require_once REPACK_PLUGIN_DIR . 'admin/class-repack-telemetry.php';
+		require_once REPACK_PLUGIN_DIR . 'admin/partials/class-repack-telemetry.php';
 
 		/**
 		 * Init Telemetry
@@ -106,9 +111,9 @@ class Repack_Admin {
 
 
 	/**
-	 * WeRePack section in order overwiew
+	 * WeRePack section in single order overview
 	 *
-	 * @param $order
+	 * @param WC_Order $order
 	 */
 	public function add_order_details( $order ) {
 		if ( $this->is_repack_order( $order ) ) { ?>
@@ -124,6 +129,22 @@ class Repack_Admin {
 
 			<?php
 		}
+	}
+
+	/**
+	 * WeRePack section in order preview
+	 *
+	 * @param array $details
+	 * @param WC_Order $order
+	 * @return array
+	 */
+	public function preview_add_order_details( $details, $order ) {
+
+		if ( $this->is_repack_order( $order ) ) {
+			$details['shipping_via'] .= ' (' . esc_html( $this->get_order_repack_decision( $order ) ) . ')';
+		}
+
+		return $details;
 	}
 
 	/**

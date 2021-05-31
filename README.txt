@@ -23,7 +23,7 @@ To do this, the plugin adds a field in the WooCommerce checkout process where cu
 *   Registered users can set their default value in the WooCommerce Dashboard.
 *   Shortcodes `[repack]` & `[repack_summary]` to show your support and savings.
 *   Clean code, no ads & no annoying notifications
-*   Highly customizable via Hooks & Filters
+*   Highly customizable via Hooks & Filters & since v1.2.0 via Settings Page
 *   Optionally share basic stats, help us improve and get listed on WeRePack.org as a supporter site.
 *   Available translations: English, German & German (formal)
 
@@ -54,6 +54,10 @@ Displays a summary of you sites savings. You can copy and overwrite the template
 * `prepend=""`: HTML to prepend to output. Default: Empty string
 * `append=""`:  HTML to append to output. Default: Empty string
 
+**Settings Page**
+
+Adjust the plugin to your liking on the settings page: `WooCommerce Settings -> Shipping -> WeRePack Settings`. If you miss an option use one of the following filters or let us know.
+
 **Available Filters**
 
 You can customize the plugin behavior and text by using the following filters in your themes `functions.php` or `/mu-plugins/wc-repack.php` file:
@@ -63,7 +67,7 @@ You can customize the plugin behavior and text by using the following filters in
 *   `repack_consent_field_label`: Label of the consent checkbox.
 *   `repack_consent_field_description`: Description of the consent checkbox.
 *   `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox.
-*   `repack_coupon_removed_applied_text`: Notice text after coupon was applied.
+*   `repack_coupon_applied_notice_text`: Notice text after coupon was applied.
 *   `repack_coupon_removed_notice_text`: Notice text after coupon was removed.
 *   `repack_email_label`: Label in WooCommerce mails if consent was given.
 *   `repack_email_text`: Text in WooCommerce mails if consent was given.
@@ -108,6 +112,14 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 5. ... get listed as Supporter on WeRePack.org
 
 == Changelog ==
+
+= 1.2.0 =
+* Enh: Settings Page in WooCommerce Settings -> Shipping -> WeRePack Settings
+* Enh: Join the WeRePack.org Community from Settings Page (or revoke your consent=
+* Enh: Manual Sync from Settings Page
+* Enh: Display hint in order preview if consent is given
+* Fix: Correct last data submission
+* Fix: Various small improvements
 
 = 1.1.8 =
 * Enh: Rename plugin to WeRePack to inline with initiatives name

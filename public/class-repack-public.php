@@ -115,11 +115,11 @@ class Repack_Public {
 	 * @return string
 	 */
 	public static function get_repack_coupon_name() {
-		return wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', 'WeRePack' ) );
+		return wc_sanitize_coupon_code( apply_filters( 'repack_coupon_name', null ) );
 	}
 
 	/**
-	 * Get coupon ID
+	 * Get Coupon ID
 	 *
 	 * @return int
 	 */
@@ -147,15 +147,8 @@ class Repack_Public {
 	private function get_repack_form_field_args( $args = array() ) {
 		$merged_args = array_merge(
 			array(
-				'label'       => apply_filters( 'repack_consent_field_label', __( 'Yes, please reuse packaging if available.', 'repack-for-woocommerce' ) ),
-				'description' => apply_filters(
-					'repack_consent_field_description',
-					sprintf(
-					/* translators: %s: WeRePack website link */
-						__( 'With your consent we prefer already used shipping packaging. Help us protect the environment and learn more about the initiative on %s.', 'repack-for-woocommerce' ),
-						'<a href="https://werepack.org/" target="_blank">WeRePack.org</a>'
-					)
-				),
+				'label'       => apply_filters( 'repack_consent_field_label', null ),
+				'description' => apply_filters( 'repack_consent_field_description', null ),
 				'type'        => 'checkbox',
 				'required'    => false,
 				'priority'    => 99,
@@ -329,12 +322,8 @@ class Repack_Public {
 				wc_clear_notices();
 				wc_add_notice(
 					apply_filters(
-						'repack_coupon_removed_notice_text',
-						sprintf(
-						/* translators: %s: Thank You */
-							__( 'Your discount for reusing packaging has been applied. %s', 'repack-for-woocommerce' ),
-							'<strong>' . __( 'Thank you!', 'repack-for-woocommerce' ) . '</strong>'
-						)
+						'repack_coupon_applied_notice_text',
+						null
 					),
 					'success'
 				);
@@ -345,10 +334,8 @@ class Repack_Public {
 				wc_clear_notices();
 				wc_add_notice(
 					apply_filters(
-						'repack_coupon_applied_notice_text',
-						sprintf(
-							__( 'Your discount for reusing packaging has been removed.', 'repack-for-woocommerce' )
-						)
+						'repack_coupon_removed_notice_text',
+						null
 					),
 					'notice'
 				);

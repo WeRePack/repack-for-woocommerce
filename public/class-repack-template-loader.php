@@ -55,7 +55,7 @@ class Repack_Template_Loader {
 	 *
 	 * @var string
 	 */
-	protected $plugin_template_directory = 'public/templates';
+	protected $plugin_template_directory = 'templates';
 
 	/**
 	 * Internal use only: Store located template paths.

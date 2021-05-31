@@ -34,8 +34,20 @@ class Repack_Deactivator {
 	 */
 	public static function deactivate() {
 		if ( apply_filters( 'repack_deactivate_remove_all_meta', false ) ) {
+			$options = array_merge(
+				array_keys( ( new Repack() )->get_settings_options() ),
+				array(
+					'repack_counter',
+					'repack_start',
+					'repack_telemetry_sent',
+					'repack_telemetry_optin',
+					'repack_coupon_removed_notice_text',
+					'repack_telemetry_consent_dismissed',
+				)
+			);
+
 			// Delete Plugin Options
-			foreach ( array( 'repack_counter', 'repack_start', 'repack_telemetry_sent', 'repack_telemetry_optin', 'repack_telemetry_no_consent' ) as $option ) {
+			foreach ( $options as $option ) {
 				delete_option( $option );
 			}
 
@@ -60,7 +72,7 @@ class Repack_Deactivator {
 			}
 		}
 
-        // Clear scheduled event
-        wp_clear_scheduled_hook( 'repack_telemetry' );
+		// Clear scheduled event
+		wp_clear_scheduled_hook( 'repack_telemetry' );
 	}
 }
