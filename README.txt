@@ -115,7 +115,7 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 = 1.2.0 =
 * Enh: Settings Page in WooCommerce Settings -> Shipping -> WeRePack Settings
-* Enh: Join the WeRePack.org Community from Settings Page (or revoke your consent=
+* Enh: Join the WeRePack.org Community from Settings Page (or revoke your consent)
 * Enh: Manual Sync from Settings Page
 * Enh: Display hint in order preview if consent is given
 * Fix: Correct last data submission
