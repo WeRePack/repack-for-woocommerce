@@ -67,6 +67,7 @@ You can customize the plugin behavior and text by using the following filters in
 *   `repack_consent_field_label`: Label of the consent checkbox.
 *   `repack_consent_field_description`: Description of the consent checkbox.
 *   `repack_consent_field_args`: Arguments of the `woocommerce_form_field()` function to add the consent checkbox.
+*   `repack_consent_field_firework`: Set to `false` to deactivate the checkbox animation on consent.
 *   `repack_coupon_applied_notice_text`: Notice text after coupon was applied.
 *   `repack_coupon_removed_notice_text`: Notice text after coupon was removed.
 *   `repack_email_label`: Label in WooCommerce mails if consent was given.
@@ -112,6 +113,10 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 5. ... get listed as Supporter on WeRePack.org
 
 == Changelog ==
+
+= 1.3.0 =
+* Enh: Tested with WooCommerce 6.0
+* Enh: Option to disable checkbox animation [#5](https://github.com/ouun/repack-for-woocommerce/issues/5)
 
 = 1.2.0 =
 * Enh: Settings Page in WooCommerce Settings -> Shipping -> WeRePack Settings

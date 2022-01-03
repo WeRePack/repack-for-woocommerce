@@ -171,7 +171,8 @@ class Repack {
 	public function get_settings_options() {
 		return array(
 			// Consent Box
-			'repack_checkout_consent_position'  => 'woocommerce_after_order_notes',
+			'repack_checkout_consent_position' => 'woocommerce_after_order_notes',
+            'repack_consent_field_firework'      => true,
 			'repack_consent_field_label'        => __( 'Yes, please reuse packaging if available.', 'repack-for-woocommerce' ),
 			'repack_consent_field_description'  => sprintf(
 			/* translators: %s: WeRePack website link */
