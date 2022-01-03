@@ -103,7 +103,7 @@ class Repack_Public {
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'security' => wp_create_nonce( 'repack_ajax_nonce' ),
                 'options' => array(
-                        'celebrate' => apply_filters('repack_consent_field_firework', null)
+                        'celebrate' => wc_string_to_bool(apply_filters('repack_consent_field_firework', null))
                 )
 			)
 		);
