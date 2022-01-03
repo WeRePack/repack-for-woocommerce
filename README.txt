@@ -117,6 +117,7 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 = 1.3.0 =
 * Enh: Tested with WooCommerce 6.0
 * Enh: Option to disable checkbox animation [#5](https://github.com/ouun/repack-for-woocommerce/issues/5)
+* Enh: Hide Remove Option for WeRepack Coupons in Cart [#4](https://github.com/ouun/repack-for-woocommerce/issues/4)
 
 = 1.2.0 =
 * Enh: Settings Page in WooCommerce Settings -> Shipping -> WeRePack Settings
