@@ -18,27 +18,28 @@
 	<tbody>
 	<tr>
 		<td style="min-width: 200px;"><?php esc_html_e( 'Website URL', 'repack-for-woocommerce' ); ?></td>
-		<td><code><?php echo esc_html( $data->siteURL ); ?></code></td>
+		<td><code><?php echo esc_html( $data->site_url ); ?></code></td>
 	</tr>
 	<tr>
 		<td><?php esc_html_e( 'Website Language', 'repack-for-woocommerce' ); ?></td>
-		<td><code><?php echo esc_html( $data->siteLang ); ?></code></td>
+		<td><code><?php echo esc_html( $data->site_lang ); ?></code></td>
 	</tr>
 	<tr>
 		<td><?php esc_html_e( 'WeRePack Start', 'repack-for-woocommerce' ); ?></td>
-		<td><code><?php echo esc_html( wp_date( get_option( 'date_format' ), $data->repackStart ) ); ?></code></td>
+		<td><code><?php echo esc_html( wp_date( get_option( 'date_format' ), $data->repack_start ) ); ?></code></td>
 	</tr>
 	<tr>
 		<td><?php esc_html_e( 'WeRePack Consents', 'repack-for-woocommerce' ); ?></td>
-		<td><code><?php echo esc_html( ! empty( $data->repackCounter ) ? $data->repackCounter : __( 'None yet', 'repack-for-woocommerce' ) ); ?></code></td>
+		<td><code><?php echo esc_html( ! empty( $data->repack_counter ) ? $data->repack_counter : __( 'None yet', 'repack-for-woocommerce' ) ); ?></code></td>
 	</tr>
 	<tr>
 		<td><?php esc_html_e( 'WeRePack Consent Ratio', 'repack-for-woocommerce' ); ?></td>
-		<td><code><?php echo esc_html( $data->repackRatio . '%' ); ?></code></td>
+		<td><code><?php echo esc_html( $data->repack_ratio . '%' ); ?></code></td>
 	</tr>
 	<tr>
 		<td><?php esc_html_e( 'WeRePack Coupon', 'repack-for-woocommerce' ); ?></td>
-		<td><code><?php echo esc_html( $data->repackCoupon ? sprintf( __( 'Available (%s)', 'repack-for-woocommerce' ), $data->repackCouponCode ) : __( 'Not available', 'repack-for-woocommerce' ) ); ?></code></td>
+		<?php /* translators: %s: Name of coupon. */ ?>
+		<td><code><?php echo esc_html( $data->repack_coupon ? sprintf( __( 'Available (%s)', 'repack-for-woocommerce' ), $data->repack_coupon_code ) : __( 'Not available', 'repack-for-woocommerce' ) ); ?></code></td>
 	</tr>
 	</tbody>
 	<tfoot>

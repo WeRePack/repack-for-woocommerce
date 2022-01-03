@@ -125,12 +125,9 @@ class Repack_Telemetry {
 			</p>
 			<div class="toggle-hidden hidden">
 				<?php
-					ob_start();
-					$template_loader
-						->set_template_data( $data )
-						->get_template_part( 'telemetry-data' );
-
-					echo ob_get_clean();
+				$template_loader
+					->set_template_data( $data )
+					->get_template_part( 'telemetry-data' );
 				?>
 			</div>
 			<p class="actions">
@@ -163,14 +160,14 @@ class Repack_Telemetry {
 		return wp_parse_args(
 			$data,
 			array(
-				'siteURL'          => home_url( '/' ),
-				'siteLang'         => get_locale(),
-				'repackStart'      => get_option( 'repack_start' ),
-				'repackCounter'    => get_option( 'repack_counter' ),
-				'repackRatio'      => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
-				'repackCoupon'     => Repack_Public::repack_coupon_exists(),
-				'repackCouponCode' => Repack_Public::get_repack_coupon_name(),
-				'repackLastSent'   => get_option( 'repack_telemetry_sent' ),
+				'site_url'           => home_url( '/' ),
+				'site_lang'          => get_locale(),
+				'repack_start'       => get_option( 'repack_start' ),
+				'repack_counter'     => get_option( 'repack_counter' ),
+				'repack_ratio'       => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
+				'repack_coupon'      => Repack_Public::repack_coupon_exists(),
+				'repack_coupon_code' => Repack_Public::get_repack_coupon_name(),
+				'repackLastSent'     => get_option( 'repack_telemetry_sent' ),
 			)
 		);
 	}
@@ -198,7 +195,7 @@ class Repack_Telemetry {
 			)
 		);
 
-		if ( $consents === 0 || $orders->found_posts === 0 ) {
+		if ( 0 === $consents || 0 === $orders->found_posts ) {
 			return '0';
 		}
 

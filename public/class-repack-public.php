@@ -84,9 +84,9 @@ class Repack_Public {
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/repack-public.css', array(), $this->version, 'all' );
 
-        // Do not allow removal of WeRePack Coupon
-        // @see https://github.com/ouun/repack-for-woocommerce/issues/4
-        wp_add_inline_style($this->plugin_name, '.woocommerce-remove-coupon[data-coupon="' . wc_strtolower(apply_filters('repack_coupon_name', null)) . '"] {display: none;}');
+		// Do not allow removal of WeRePack Coupon
+		// @see https://github.com/ouun/repack-for-woocommerce/issues/4
+		wp_add_inline_style( $this->plugin_name, '.woocommerce-remove-coupon[data-coupon="' . wc_strtolower( apply_filters( 'repack_coupon_name', null ) ) . '"] {display: none;}' );
 	}
 
 	/**
@@ -102,9 +102,9 @@ class Repack_Public {
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'security' => wp_create_nonce( 'repack_ajax_nonce' ),
-                'options' => array(
-                        'celebrate' => wc_string_to_bool(apply_filters('repack_consent_field_firework', null))
-                )
+				'options'  => array(
+					'celebrate' => wc_string_to_bool( apply_filters( 'repack_consent_field_firework', null ) ),
+				),
 			)
 		);
 	}
@@ -466,11 +466,13 @@ class Repack_Public {
 	 * @return bool|mixed|void
 	 */
 	public function get_user_repack_counter( $user_id ) {
-		return get_user_meta(
+		$counter = get_user_meta(
 			$user_id,
 			$this->meta_name . '_counter',
 			true
-		) ?: '0';
+		);
+
+		return ! empty( $counter ) ? $counter : '0';
 	}
 
 	/**
@@ -479,7 +481,8 @@ class Repack_Public {
 	 * @return bool|mixed|void
 	 */
 	public static function get_global_repack_counter() {
-		return get_option( 'repack_counter' ) ?: '0';
+		$counter = get_option( 'repack_counter' );
+		return is_string( $counter ) ? $counter : '0';
 	}
 
 	/**
@@ -552,7 +555,10 @@ class Repack_Public {
 	 */
 	public static function get_repack_summary( $packages = null ) {
 		$template_loader = new Repack_Template_Loader();
-		$packages        = $packages ?: self::get_repack_savings( 'packaging', $packages, true );
+
+		if ( ! $packages ) {
+			$packages = self::get_repack_savings( 'packaging', $packages, true );
+		}
 
 		ob_start();
 		$template_loader
