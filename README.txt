@@ -3,7 +3,7 @@ Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, coupon, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: 1.0
 Requires PHP: 5.6
 License: GPLv2 or later
