@@ -22,23 +22,19 @@
  */
 class Repack_Activator {
 
-
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function activate() {
-		// Add RePack counter option
-		add_option( 'repack_counter' );
-		// Add the start time
-		add_option( 'repack_start', current_datetime()->getTimestamp() );
-		// Schedule recurring event
-		// Note: No data sending without consent
-		if ( ! wp_next_scheduled( 'repack_telemetry' ) ) {
-			wp_schedule_event( time(), 'weekly', 'repack_telemetry' );
-		}
-	}
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function activate() {
+        // Add RePack counter option
+        add_option( 'repack_counter' );
+        // Add the start time
+        add_option( 'repack_start', current_datetime()->getTimestamp() );
+        // Schedule recurring event
+        Repack_Telemetry::activate_telemetry();
+    }
 }

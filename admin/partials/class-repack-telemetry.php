@@ -51,7 +51,7 @@ class Repack_Telemetry {
 		$this->run_action();
 
 		// Scheduled event to trigger telemetry
-		add_action( 'repack_telemetry', array( $this, 'maybe_send_data' ) );
+        add_action( 'repack_telemetry', array( $this, 'maybe_send_data' ) );
 	}
 
 	/**
@@ -83,20 +83,15 @@ class Repack_Telemetry {
 	private function send_data() {
 		// Ping remote server.
 		return wp_remote_post(
-			'https://werepack.org/?action=repack-stats',
+			'https://werepack.org/api/community/v1/sites',
 			array(
 				'method'   => 'POST',
 				'blocking' => false,
-				'body'     => array_merge(
-					array(
-						'action' => 'repack-stats',
-					),
-					$this->get_data(
-						array(
-							'repackLastSent' => time(),
-						)
-					)
-				),
+				'body'     => $this->get_data(
+                    array(
+                        'repack_last_sent' => time(),
+                    )
+                ),
 			)
 		);
 	}
@@ -167,7 +162,7 @@ class Repack_Telemetry {
 				'repack_ratio'       => $this->get_repack_ratio( get_option( 'repack_counter' ) ),
 				'repack_coupon'      => Repack_Public::repack_coupon_exists(),
 				'repack_coupon_code' => Repack_Public::get_repack_coupon_name(),
-				'repackLastSent'     => get_option( 'repack_telemetry_sent' ),
+				'repack_last_sent'   => get_option( 'repack_telemetry_sent' ),
 			)
 		);
 	}
@@ -228,11 +223,14 @@ class Repack_Telemetry {
 			// Telemetry Consent
 			if ( 'telemetry' === sanitize_text_field( wp_unslash( $_GET['repack-action'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				// Check the wp-nonce.
-				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) ) ) {
-					// Initially send the data in a minute
-					if ( wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'repack_telemetry' ) ) {
+                if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) ) ) {
+					// Add recurring events
+					if ( self::activate_telemetry() ) {
 						// All good, we can save the option to dismiss this notice.
 						update_option( 'repack_telemetry_optin', true );
+
+                        // Initially send the data in a minute
+                        wp_schedule_single_event(time() + MINUTE_IN_SECONDS * 30, 'repack_telemetry' );
 					}
 				}
 			}
@@ -241,10 +239,10 @@ class Repack_Telemetry {
 			if ( 'revoke-telemetry' === sanitize_text_field( wp_unslash( $_GET['repack-action'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				// Check the wp-nonce.
 				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) ) ) {
-					// Remove scheduled events
-					wp_clear_scheduled_hook( 'repack_telemetry' );
-					// Remove consent
-					update_option( 'repack_telemetry_optin', false );
+                    // Remove recurring events
+                    self::deactivate_telemetry();
+                    // Remove consent
+                    update_option( 'repack_telemetry_optin', false );
 				}
 			}
 
@@ -257,4 +255,29 @@ class Repack_Telemetry {
 			}
 		}
 	}
+
+    /**
+     * Activate Telemetry Events
+     * @since    1.4.0
+     *
+     * @return bool|WP_Error
+     */
+    public static function activate_telemetry() {
+        // Note: No data sending without consent
+        if ( ! wp_next_scheduled( 'repack_telemetry' ) ) {
+            return wp_schedule_event( time(), 'weekly', 'repack_telemetry' );
+        }
+
+        return false;
+    }
+
+    /**
+     * Deactivate Telemetry Events
+     * @since    1.4.0
+     *
+     * @return false|int|WP_Error
+     */
+    public static function deactivate_telemetry() {
+        return wp_clear_scheduled_hook( 'repack_telemetry' );
+    }
 }
