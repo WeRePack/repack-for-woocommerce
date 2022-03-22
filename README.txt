@@ -3,7 +3,7 @@ Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, coupon, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
-Tested up to: 5.9
+Tested up to: 5.9.2
 Stable tag: 1.0
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -113,6 +113,11 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 5. ... get listed as Supporter on WeRePack.org
 
 == Changelog ==
+
+= 1.4.0 =
+* Enh: Tested with WooCommerce 6.3.1
+* Fix: WeRePack Community Updates by...
+* Fix: Switch to REST API
 
 = 1.3.0 =
 * Enh: Tested with WooCommerce 6.0
