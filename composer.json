@@ -29,6 +29,7 @@
         ]
     },
     "require": {
+        "ext-json": "*"
     },
     "config": {
         "allow-plugins": {

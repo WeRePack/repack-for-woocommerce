@@ -114,6 +114,9 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.4.1 =
+* Enh: Dashboard Settings: Improved Notifications
+
 = 1.4.0 =
 * Enh: Tested with WooCommerce 6.3.1
 * Fix: WeRePack Community Updates by...

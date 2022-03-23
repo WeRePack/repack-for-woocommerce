@@ -59,18 +59,43 @@ class Repack_Telemetry {
 	 *
 	 * @access public
 	 * @since 1.1.0
+	 *
+	 * @param array $args
 	 * @return void
 	 */
-	public function maybe_send_data() {
+	public function maybe_send_data( $args = array() ) {
 		// Check if the user has consented to the data sending.
 		if ( ! get_option( 'repack_telemetry_optin' ) ) {
 			return;
 		}
 
-		// Send data & update sent value
-		if ( ! is_wp_error( $this->send_data() ) ) {
-			update_option( 'repack_telemetry_sent', time() );
+		// Send data
+		$request = $this->send_data( $args );
+
+		// Get Response
+		$api_response      = json_decode( wp_remote_retrieve_body( $request ), true );
+		$api_response_code = wp_remote_retrieve_response_code( $request );
+
+		// Blocking request (e.g. Sync) retrieve a proper debuggable response
+		if ( isset( $args['blocking'] ) && $args['blocking'] ) {
+			foreach ( $api_response as $message ) {
+				if ( $message ) {
+					$classes = strval( $api_response_code ) === '200' ? 'notice notice-success' : 'notice notice-error';
+					add_action(
+						'admin_notices',
+						function () use ( $message, $classes ) {
+							echo '<div class="' . esc_html( $classes ) . '"><p><b>' . esc_html__( 'WeRePack.org API Response:', 'repack-for-woocommerce' ) . '</b> ' . esc_html( $message ) . '</p></div>';
+						}
+					);
+				}
+			}
+
+			if ( strval( $api_response_code ) !== '200' ) {
+				return;
+			}
 		}
+
+		update_option( 'repack_telemetry_sent', time() );
 	}
 
 	/**
@@ -78,20 +103,25 @@ class Repack_Telemetry {
 	 *
 	 * @access private
 	 * @since 1.1.0
+	 *
+	 * @param array $args
 	 * @return array|WP_Error
 	 */
-	private function send_data() {
+	private function send_data( $args = array() ) {
 		// Ping remote server.
 		return wp_remote_post(
 			'https://werepack.org/api/community/v1/sites',
-			array(
-				'method'   => 'POST',
-				'blocking' => false,
-				'body'     => $this->get_data(
-					array(
-						'repack_last_sent' => time(),
-					)
-				),
+			wp_parse_args(
+				$args,
+				array(
+					'method'   => 'POST',
+					'blocking' => false,
+					'body'     => $this->get_data(
+						array(
+							'repack_last_sent' => time(),
+						)
+					),
+				)
 			)
 		);
 	}
@@ -146,9 +176,10 @@ class Repack_Telemetry {
 	 * Builds and returns the data or uses cached if data already exists.
 	 *
 	 * @access private
+	 * @since 1.1.0
+	 *
 	 * @param array $data
 	 * @return array
-	 * @since 1.1.0
 	 */
 	public function get_data( $data = array() ) {
 		// Build data and return the array.
@@ -250,7 +281,7 @@ class Repack_Telemetry {
 			if ( 'sync' === sanitize_text_field( wp_unslash( $_GET['repack-action'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				// Check the wp-nonce.
 				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) ) ) {
-					$this->maybe_send_data();
+					$this->maybe_send_data( array( 'blocking' => true ) );
 				}
 			}
 		}
