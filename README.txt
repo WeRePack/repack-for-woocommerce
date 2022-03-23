@@ -114,6 +114,9 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 
 == Changelog ==
 
+= 1.4.2 =
+* Fix: In some edge cases (e.g. deleting orders) the WeRePack ratio can become >100%
+
 = 1.4.1 =
 * Enh: Dashboard Settings: Improved Notifications
 

@@ -227,6 +227,16 @@ class Repack_Telemetry {
 
 		$ratio = round( $consents * 100 / $orders->found_posts );
 
+		// Edge Case: Ratio can become >100% when deleting orders
+		// We need to fix the amount of consents to not confuse
+		if ( $ratio > 100 ) {
+			// Get the overhead
+			$overhead = $consents - $orders->found_posts;
+			// Update consents field to fix overhead
+			// Sure we are sad to do that, but we need to follow math rules
+			update_option( 'repack_counter', $consents - $overhead );
+		}
+
 		return (string) $ratio > 0 ? $ratio : '0';
 	}
 
