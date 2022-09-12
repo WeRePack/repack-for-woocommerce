@@ -206,14 +206,14 @@ class Repack_Telemetry {
 	 * Calculate the ratio: orders / consents
 	 *
 	 * @param $consents
-	 * @return float|string
+	 * @return string
 	 */
 	private function get_repack_ratio( $consents ) {
 		// Orders since starting WeRePack support
 		$orders = new WP_Query(
 			array(
 				'posts_per_page' => -1,
-				'fields'         => 'ids',
+				'fields'          => 'ids',
 				'post_type'      => 'shop_order',
 				'post_status'    => array_keys( wc_get_order_statuses() ),
 				'date_query'     => array(
