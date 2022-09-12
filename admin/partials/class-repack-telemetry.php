@@ -136,7 +136,10 @@ class Repack_Telemetry {
 	public function admin_notice() {
 
 		// Early exit if the user has dismissed the consent, or if they have opted-in.
-		if ( get_option( 'repack_telemetry_consent_dismissed' ) || get_option( 'repack_telemetry_optin' ) ) {
+		if ( get_option( 'repack_telemetry_consent_dismissed' ) ||
+             get_option( 'repack_telemetry_optin' ) ||
+           ! function_exists( 'wc_get_order_statuses' )
+        ) {
 			return;
 		}
 
