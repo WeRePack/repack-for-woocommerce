@@ -3,7 +3,7 @@ Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, coupon, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
-Tested up to: 6.0.0
+Tested up to: 6.0.2
 Stable tag: 1.0
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -110,9 +110,16 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 2. Shipping notice in WooCommerce Order Overview
 3. Optionally integrates with WooCommerce Coupons
 4. Optionally share your savings and ...
-5. ... get listed as Supporter on WeRePack.org
+5. ... get listed as Community Site on WeRePack.org
 
 == Changelog ==
+
+= 1.4.3 =
+* Enh: Tested with WooCommerce 6.8.x
+* Enh: Improves PHP8 support
+* Enh: Various small improvements
+* Fix: Error notice if WooCommerce is deactivated
+* Fix: Extend API call timeout
 
 = 1.4.2 =
 * Fix: In some edge cases (e.g. deleting orders) the WeRePack ratio can become >100%
@@ -121,7 +128,7 @@ Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugin
 * Enh: Dashboard Settings: Improved Notifications
 
 = 1.4.0 =
-* Enh: Tested with WooCommerce 6.3.1
+* Enh: Tested with WooCommerce 6.3.x
 * Fix: WeRePack Community Updates by...
 * Fix: Switch to REST API
 
