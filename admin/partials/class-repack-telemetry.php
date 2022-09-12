@@ -116,6 +116,7 @@ class Repack_Telemetry {
 				array(
 					'method'   => 'POST',
 					'blocking' => false,
+                    'timeout'  => 30,
 					'body'     => $this->get_data(
 						array(
 							'repack_last_sent' => time(),
@@ -307,6 +308,9 @@ class Repack_Telemetry {
 	 * @return bool|WP_Error
 	 */
 	public static function activate_telemetry() {
+        // Remove existing events
+        self::deactivate_telemetry();
+
 		// Note: No data sending without consent
 		if ( ! wp_next_scheduled( 'repack_telemetry' ) ) {
 			return wp_schedule_event( time(), 'weekly', 'repack_telemetry' );
