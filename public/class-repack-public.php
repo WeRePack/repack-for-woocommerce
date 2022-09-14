@@ -85,7 +85,7 @@ class Repack_Public {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/repack-public.css', array(), $this->version, 'all' );
 
 		// Do not allow removal of WeRePack Coupon
-		// @see https://github.com/ouun/repack-for-woocommerce/issues/4
+		// @see https://github.com/WeRePack/repack-for-woocommerce/issues/4
 		wp_add_inline_style( $this->plugin_name, '.woocommerce-remove-coupon[data-coupon="' . wc_strtolower( apply_filters( 'repack_coupon_name', null ) ) . '"] {display: none;}' );
 	}
 
