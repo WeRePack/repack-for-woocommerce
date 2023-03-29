@@ -114,6 +114,9 @@ Otherwise, just start to translate on [translate.wordpress.org/projects/wp-plugi
 
 == Changelog ==
 
+= 1.4.4 =
+* Update supported WordPress & WooCommerce versions
+
 = 1.4.3 =
 * Enh: Tested with WooCommerce 6.8.x
 * Enh: Improves PHP8 support
