@@ -3,7 +3,7 @@ Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, coupon, consent, recycle, reuse, ecommerce, sustainable
 Requires at least: 4.0.0
-Tested up to: 6.0.2
+Tested up to: 6.2
 Stable tag: 1.0
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -102,7 +102,7 @@ Yes, please! We need every heart, hand and mouth. Talk about us, help us improve
 
 We are so happy and thankful that you support the initiative with your contribution! Since version 1.1.2 we use the official WordPress Translation System on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "translate.wordpress.org").
 If it is the first time that you contribute translations, please have a short look at [the First Steps](https://make.wordpress.org/polyglots/handbook/translating/first-steps/#contributing-your-first-translations "First Steps").
-Otherwise just start to translate on [translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "translate.wordpress.org").
+Otherwise, just start to translate on [translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce](https://translate.wordpress.org/projects/wp-plugins/repack-for-woocommerce/ "translate.wordpress.org").
 
 == Screenshots ==
 
