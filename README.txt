@@ -1,7 +1,7 @@
 === WeRePack - Reuse Packaging for WooCommerce ===
 Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
-Tags: woocommerce, shipping, coupon, consent, recycle, reuse, ecommerce, sustainable
+Tags: woocommerce, shipping, recycle, reuse, sustainable
 Requires at least: 4.0.0
 Tested up to: 6.7
 Stable tag: 1.0
@@ -9,7 +9,7 @@ Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Ask for customer permission to ship reused shipping packaging. Show your support for a more sustainable ecommerce, reduce waste, save money and be part of the WeRePack.org initiative.
+Request customer permission to use reused packaging. Join WeRePack.org to support sustainable e-commerce, reduce waste, and save money.
 
 == Description ==
 
