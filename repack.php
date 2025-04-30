@@ -11,7 +11,7 @@
  * Plugin Name:       WeRePack - Reuse Packaging for WooCommerce
  * Plugin URI:        https://WeRePack.org/
  * Description:       Get permission from your customers to reuse already used shipping packaging. As a shop owner it is an easy way to save resources, money and above all to protect the environment.
- * Version:           1.4.6
+ * Version:           1.4.7
  * Author:            WeRePack.org
  * Author URI:        https://WeRePack.org
  * Text Domain:       repack-for-woocommerce
@@ -19,7 +19,7 @@
  *
  * Requires Plugins:  		woocommerce
  * WC requires at least: 	3.6
- * WC tested up to: 		9.3
+ * WC tested up to: 		9.8
  *
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -33,7 +33,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'REPACK_VERSION', '1.4.6' );
+define( 'REPACK_VERSION', '1.4.7' );
 define( 'REPACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'REPACK_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
