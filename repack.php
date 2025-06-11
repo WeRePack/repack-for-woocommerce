@@ -75,7 +75,7 @@ require REPACK_PLUGIN_DIR . 'includes/class-repack.php';
  */
 function run_repack() {
 	$plugin = new Repack();
-	$plugin->run();
+	add_action('init', [$plugin, 'run']);
 }
 
 run_repack();
