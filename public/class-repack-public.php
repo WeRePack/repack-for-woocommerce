@@ -405,7 +405,7 @@ class Repack_Public {
 		//Update the settings with the new count
 		update_option(
 			'repack_counter',
-			get_option( 'repack_counter', 0 ) + $packages
+			intval(get_option( 'repack_counter', 0 )) + intval($packages)
 		);
 	}
 

@@ -229,7 +229,7 @@ class Repack_Telemetry {
 			return '0';
 		}
 
-		$ratio = round( $consents * 100 / $orders->found_posts );
+		$ratio = round( intval($consents) * 100 / $orders->found_posts );
 
 		// Edge Case: Ratio can become >100% when deleting orders
 		// We need to fix the amount of consents to not confuse
