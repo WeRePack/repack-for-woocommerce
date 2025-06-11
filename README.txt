@@ -3,8 +3,8 @@ Contributors: werepack, philippmuenchen
 Donate link: https://www.paypal.me/ouun
 Tags: woocommerce, shipping, recycle, reuse, sustainable
 Requires at least: 4.0.0
-Tested up to: 6.7
-Stable tag: 1.4.7
+Tested up to: 6.8
+Stable tag: 1.4.8
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -114,7 +114,12 @@ Otherwise, just start to translate on [translate.wordpress.org/projects/wp-plugi
 
 == Changelog ==
 
-= 1.4.6 =
+= 1.4.8 =
+* Fix minor PHP bug where a string should be cast to an integer
+* Fix textdomain loading warning
+* Update supported WordPress & WooCommerce versions
+
+= 1.4.7 =
 * Fix textdomain loading issue
 * Update supported WordPress & WooCommerce versions
 
